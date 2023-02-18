@@ -27,8 +27,8 @@ extern char	*yytext;
 extern int	yylex P((void));
 /*----------------------------------------------------------------------*/
 
-PUBLIC  int yynerrs;		/* Total error count		*/
-PRIVATE int Lookahead;		/* Lookahead token	    	*/
+  int yynerrs;		/* Total error count		*/
+ int Lookahead;		/* Lookahead token	    	*/
 
 /*======================================================================
  * Low-level support routines for parser:
@@ -36,15 +36,15 @@ PRIVATE int Lookahead;		/* Lookahead token	    	*/
 
 #define match(x) ((x) == Lookahead)
 
-PRIVATE	void advance()
+	void advance()
 {
     if( Lookahead != _EOI_ )
 	while( (Lookahead = yylex()) == WHITESPACE )
 		;
 }
 /*----------------------------------------------------------------------*/
-ANSI( PRIVATE	void	lookfor( int first, ... )	)
-KnR ( PRIVATE	void	lookfor(     first      )	)
+ANSI( 	void	lookfor( int first, ... )	)
+KnR ( 	void	lookfor(     first      )	)
 KnR ( int	first;					)
 {
     /* Read input until the current symbol is in the argument list. For example,
@@ -70,7 +70,7 @@ KnR ( int	first;					)
  * The Parser itself
  */
 
-PUBLIC	int yyparse P(( void ))   /* spec : definitions body stuff */
+	int yyparse P(( void ))   /* spec : definitions body stuff */
 {
 	extern yylineno;
 	Lookahead = yylex();	   /* Get first input symbol */
@@ -80,7 +80,7 @@ PUBLIC	int yyparse P(( void ))   /* spec : definitions body stuff */
 	return 0;
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	definitions()
+	void	definitions()
 {
     /*								implemented at:
      * definitions  : TERM_SPEC tnames  definitions			1
@@ -121,7 +121,7 @@ PRIVATE	void	definitions()
     advance();					/* advance past the %%	*/
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	body()
+	void	body()
 {
     /*								implemented at:
      * body	: rule body						1
@@ -161,7 +161,7 @@ PRIVATE	void	body()
 	yylex();		       /* Advance past %% 		      */
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	right_sides()
+	void	right_sides()
 {
     /* right_sides	: {new_rhs} rhs OR right_sides			1
      *			| {new_rhs} rhs SEMI				2
@@ -181,7 +181,7 @@ PRIVATE	void	right_sides()
 	lerror(NONFATAL, "Inserted missing semicolon\n");
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	rhs()
+	void	rhs()
 {
     /* rhs	: NAME   {add_to_rhs} rhs  */
     /*		| ACTION {add_to_rhs} rhs  */

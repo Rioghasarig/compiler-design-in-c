@@ -30,14 +30,14 @@
     #pragma comment(exestr, "(C)" __DATE__ "Allen Holub. All rights reserved.")
 #endif
 
-PRIVATE   int   Warn_exit     = 0;	/* Set to 1 if -W on command line  */
-PRIVATE   int	Num_warnings  = 0;	/* Total warnings printed	   */
-PRIVATE	  char  *Output_fname = "????"; /* Name of the output file	   */
-PRIVATE   FILE *Doc_file      = NULL;   /* Error log & machine description */
+   int   Warn_exit     = 0;	/* Set to 1 if -W on command line  */
+   int	Num_warnings  = 0;	/* Total warnings printed	   */
+	  char  *Output_fname = "????"; /* Name of the output file	   */
+   FILE *Doc_file      = NULL;   /* Error log & machine description */
 
 #ifdef MAP_MALLOC
-  PRIVATE int	Malloc_chk     = 1;	/* Run-time malloc() checking      */
-  PRIVATE int	Malloc_verbose = 0;	/*     " use verbose diagnostics   */
+   int	Malloc_chk     = 1;	/* Run-time malloc() checking      */
+   int	Malloc_verbose = 0;	/*     " use verbose diagnostics   */
 #endif
 
 #define VERBOSE(str)  if(Verbose){  printf( "%s:\n", (str));  }else
@@ -76,7 +76,7 @@ char *do_dollar	  P(( int num, int rhs_size, int lineno, PRODUCTION *prod, \
  * parts actually do in the next Chapter.
  *----------------------------------------------------------------------
  */
-PUBLIC	void main( argc, argv )
+	void main( argc, argv )
 char	**argv;
 {
     MSC( _amblksiz = 2048; )	/* Declared in Microsoft C's malloc.h.        */
@@ -154,7 +154,7 @@ char	**argv;
     exit( yynerrs + (Warn_exit ? Num_warnings : 0) );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void onintr()			/* SIGABRT (Ctrl-Break, ^C) Handler */
+ void onintr()			/* SIGABRT (Ctrl-Break, ^C) Handler */
 {
     if( Output != stdout )		/* Destroy parse file so that a */
     {					/* subsequent compile will fail */
@@ -165,7 +165,7 @@ PRIVATE void onintr()			/* SIGABRT (Ctrl-Break, ^C) Handler */
     exit( EXIT_USR_ABRT );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void parse_args( argc, argv )
+	void parse_args( argc, argv )
 int	argc;
 char	**argv;
 {
@@ -284,7 +284,7 @@ out: ;
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	int	do_file()
+	int	do_file()
 {
 
     /* Process the input file. Return the number of errors.  */
@@ -344,7 +344,7 @@ PRIVATE	int	do_file()
 
     return yynerrs;
 }
-PRIVATE void	symbols( )			    /* Print the symbol table */
+ void	symbols( )			    /* Print the symbol table */
 {
     FILE  *fd;
 
@@ -357,7 +357,7 @@ PRIVATE void	symbols( )			    /* Print the symbol table */
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void	statistics( fp )
+ void	statistics( fp )
 FILE	*fp;
 {
     /* Print various statistics
@@ -388,8 +388,8 @@ OX(	 lr_stats(fp );				      	      		      )
 	fprintf(fp, "%4d      hard errors\n", yynerrs   );
 }
 /*----------------------------------------------------------------------*/
-ANSI( PUBLIC	void output( char *fmt, ... )	)
-KnR ( PUBLIC	void output(       fmt      )	)
+ANSI( 	void output( char *fmt, ... )	)
+KnR ( 	void output(       fmt      )	)
 KnR ( char	*fmt;				)
 {
     /* Works like printf(), but writes to the output file. See also: the
@@ -401,8 +401,8 @@ KnR ( char	*fmt;				)
     vfprintf( Output, fmt, args );
 }
 /*----------------------------------------------------------------------*/
-ANSI( PUBLIC	void document( char *fmt, ... )	)
-KnR ( PUBLIC	void document( fmt )		)
+ANSI( 	void document( char *fmt, ... )	)
+KnR ( 	void document( fmt )		)
 KnR ( char	*fmt;				)
 {
     /* Works like printf() but writes to yyout.doc (provided that the file
@@ -437,8 +437,8 @@ KnR ( FILE *fp;				)
 	 Doc_file = oldfp;
 }
 /*----------------------------------------------------------------------*/
-ANSI( PUBLIC	void lerror(int fatal, char *fmt, ... )	)
-KnR ( PUBLIC	void lerror(    fatal,       fmt      )	)
+ANSI( 	void lerror(int fatal, char *fmt, ... )	)
+KnR ( 	void lerror(    fatal,       fmt      )	)
 KnR ( int	fatal;					)
 KnR ( char	*fmt;					)
 {
@@ -482,8 +482,8 @@ KnR ( char	*fmt;					)
 	exit( EXIT_OTHER );
 }
 
-ANSI( PUBLIC	void error(int fatal, char *fmt, ... )	)
-KnR ( PUBLIC	void error(    fatal,       fmt      )	)
+ANSI( 	void error(int fatal, char *fmt, ... )	)
+KnR ( 	void error(    fatal,       fmt      )	)
 KnR ( int	fatal;					)
 KnR ( char	*fmt;					)
 {
@@ -522,7 +522,7 @@ KnR ( char	*fmt;					)
 	exit( EXIT_OTHER );
 }
 
-PUBLIC char	*open_errmsg()
+ char	*open_errmsg()
 {
     /* Return an error message that makes sense for a bad open */
 
@@ -536,7 +536,7 @@ PUBLIC char	*open_errmsg()
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void tail()
+	void tail()
 {
     /* Copy the remainder of input file to standard output. Yyparse will have
      * terminated with the input pointer just past the %%. Attribute mapping

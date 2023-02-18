@@ -152,7 +152,7 @@ symbol  **undeclp;
     return sym;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void purge_undecl()
+	void purge_undecl()
 {
     /* Go through the undeclared list. If something is a function, leave it in
      * the symbol table as an implicit declaration, otherwise print an error
@@ -490,7 +490,7 @@ char	*field_name;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE  symbol *find_field( s, field_name )
+  symbol *find_field( s, field_name )
 structdef	*s;
 char		*field_name;
 {
@@ -510,7 +510,7 @@ char		*field_name;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE char	*access_with( val )
+ char	*access_with( val )
 value	*val;
 {
     /* Modifies the name string in val so that it references the current type.
@@ -535,7 +535,7 @@ value	*val;
 }
 
 
-PUBLIC value *call( val, nargs )
+ value *call( val, nargs )
 value *val;
 int   nargs;
 {
@@ -765,7 +765,7 @@ abort:
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int make_types_match( v1p, v2p )
+ int make_types_match( v1p, v2p )
 value	**v1p, **v2p;
 {
     /* Takes care of type conversion. If the types are the same, do nothing;
@@ -869,7 +869,7 @@ value	*v2;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int	do_binary_const( v1p, op, v2p )
+ int	do_binary_const( v1p, op, v2p )
 value	**v1p;
 int	op;
 value	**v2p;
@@ -996,7 +996,7 @@ value	**v2p;
 }
 /*----------------------------------------------------------------------*/
 
-PRIVATE void	dst_opt( leftp, rightp, commutative )
+ void	dst_opt( leftp, rightp, commutative )
 value	**leftp;
 value	**rightp;
 int	commutative;

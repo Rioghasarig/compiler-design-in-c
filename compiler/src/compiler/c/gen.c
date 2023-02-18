@@ -13,7 +13,7 @@
 #include "value.h"
 #include "proto.h"
 
-PRIVATE int Trace = 0;		 /* Generate run-time trace if true. */
+ int Trace = 0;		 /* Generate run-time trace if true. */
 
 typedef enum request
 {
@@ -24,8 +24,8 @@ typedef enum request
 } request;
 
 
-PRIVATE int cmp 		P((struct ltab *a,struct ltab *b));
-PRIVATE void print_instruction  P(( char *b, request t		));
+ int cmp 		P((struct ltab *a,struct ltab *b));
+ void print_instruction  P(( char *b, request t		));
 /*----------------------------------------------------------------------*/
 struct ltab
 {
@@ -85,8 +85,8 @@ Ltab[] =
 #define NREQ ( sizeof(Ltab)/sizeof(*Ltab) )   /* Table size (in elements).   */
 char Comment_buf[132];			      /* Remember comment text here. */
 /*----------------------------------------------------------------------*/
-ANSI( PUBLIC void gen_comment( char *format, ... ) 	)
-KnR(  PUBLIC void gen_comment(       format    	 )	)
+ANSI(  void gen_comment( char *format, ... ) 	)
+KnR(   void gen_comment(       format    	 )	)
 KnR(  char *format;	)
 {
     /* Works like printf(), but the string is appended as a comment to the end
@@ -104,17 +104,17 @@ KnR(  char *format;	)
  * Enable/disable the generation of run-time trace output.
  */
 
-PUBLIC void enable_trace() { Trace=1; } /* Must call before parsing starts. */
-PUBLIC void disable_trace(){ Trace=0; }
+ void enable_trace() { Trace=1; } /* Must call before parsing starts. */
+ void disable_trace(){ Trace=0; }
 /*----------------------------------------------------------------------*/
-PRIVATE int     cmp( a, b )	/* Compare two lexeme fields of an ltab. */
+ int     cmp( a, b )	/* Compare two lexeme fields of an ltab. */
 struct  ltab  *a, *b;
 {
     return strcmp( a->lexeme, b->lexeme );
 }
 /*----------------------------------------------------------------------*/
-ANSI( PUBLIC void gen( char *op, ...  )	)		/* emit code */
-KnR(  PUBLIC void gen(	     op	      )	)
+ANSI(  void gen( char *op, ...  )	)		/* emit code */
+KnR(   void gen(	     op	      )	)
 KnR(  		       char *op;	)
 {
     char	 *dst_str, *src_str, b[80];
@@ -250,7 +250,7 @@ KnR(  		       char *op;	)
     print_instruction( b, tok );	/* Output the instruction. */
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void print_instruction( b, t )
+ void print_instruction( b, t )
 char	*b;	/* Buffer containing the instruction.	*/
 request	t;	/* Token representing instruction.	*/
 {

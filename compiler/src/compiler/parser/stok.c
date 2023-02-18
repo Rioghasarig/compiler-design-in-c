@@ -11,7 +11,7 @@
 extern  void make_yy_stok    P(( void ));			/* public */
 extern  void make_token_file P(( void ));
 /*----------------------------------------------------------------------*/
-PUBLIC	void	make_yy_stok()
+	void	make_yy_stok()
 {
     /* This subroutine generates the Yy_stok[] array that's
      * indexed by token value and evaluates to a string
@@ -48,7 +48,7 @@ PUBLIC	void	make_yy_stok()
     output(  "};\n\n");
 }
 /*----------------------------------------------------------------------*/
-PUBLIC void	make_token_file()
+ void	make_token_file()
 {
     /* This subroutine generates the yytokens.h file. Tokens have
      * the same value as in make_yy_stok(). A special token

@@ -17,7 +17,7 @@
 void find_select_set	P(( SYMBOL *lhs ));	/* local  */
 void select		P(( void        ));	/* public */
 /*----------------------------------------------------------------------*/
-PRIVATE	void find_select_set( lhs )
+	void find_select_set( lhs )
 SYMBOL	*lhs;				/* left-hand side of production */
 {
     /* Find the LL(1) selection set for all productions attached to the
@@ -42,7 +42,7 @@ SYMBOL	*lhs;				/* left-hand side of production */
     }
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void select( )
+	void select( )
 {
     /* Compute LL(1) selection sets for all productions in the grammar */
 

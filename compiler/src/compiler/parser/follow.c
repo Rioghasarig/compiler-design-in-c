@@ -14,15 +14,15 @@
  *			before follow() is called.
  */
 
-void	follow_closure	P(( SYMBOL *lhs ));		/* local */
-void	remove_epsilon	P(( SYMBOL *lhs ));
-void	init		P(( SYMBOL *lhs ));
+ void	follow_closure	P(( SYMBOL *lhs ));		/* local */
+ void	remove_epsilon	P(( SYMBOL *lhs ));
+ void	init		P(( SYMBOL *lhs ));
 void	follow		P(( void        ));		/* public */
 
 /*----------------------------------------------------------------------*/
-PRIVATE int	Did_something;
+ int	Did_something;
 /*----------------------------------------------------------------------*/
-PUBLIC	void follow()
+	void follow()
 {
     D( int pass = 0; 			   	 )
     D( printf( "Initializing FOLLOW sets\n" ); )
@@ -55,7 +55,7 @@ PUBLIC	void follow()
     D( printf("Follow set computation done\n"); )
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void init( lhs )
+ void init( lhs )
 SYMBOL	*lhs; 			/* Current left-hand side */
 {
     /* Initialize the FOLLOW sets. This procedure adds to the initial follow set
@@ -119,7 +119,7 @@ SYMBOL	*lhs; 			/* Current left-hand side */
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void follow_closure( lhs )
+	void follow_closure( lhs )
 SYMBOL	*lhs;
 {
     /* Adds elements to the FOLLOW sets using the following rule:
@@ -160,7 +160,7 @@ SYMBOL	*lhs;
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void  remove_epsilon( lhs )
+ void  remove_epsilon( lhs )
 SYMBOL	*lhs;
 {
     /* Remove epsilon from the FOLLOW sets. The presence of epsilon is a

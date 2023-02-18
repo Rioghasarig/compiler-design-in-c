@@ -16,16 +16,16 @@
 #define sprintf _sprintf   /* Use ANSI-compatible version out of comp.lib */
 #endif
 /*----------------------------------------------------------------------*/
-PRIVATE symbol	  *Symbol_free = NULL; /* Free-list of recycled symbols.    */
-PRIVATE link	  *Link_free   = NULL; /* Free-list of recycled links.	    */
-PRIVATE structdef *Struct_free = NULL; /* Free-list of recycled structdefs. */
+ symbol	  *Symbol_free = NULL; /* Free-list of recycled symbols.    */
+ link	  *Link_free   = NULL; /* Free-list of recycled links.	    */
+ structdef *Struct_free = NULL; /* Free-list of recycled structdefs. */
 
 #define LCHUNK	10	    /* new_link() gets this many nodes at one shot.*/
 
 static  void psym	P((symbol     *sym_p, FILE *fp	));
 static  void pstruct	P((structdef *sdef_p, FILE *fp	));
 /*----------------------------------------------------------------------*/
-PUBLIC	symbol	*new_symbol( name, scope )
+	symbol	*new_symbol( name, scope )
 char	*name;
 int	scope;
 {
@@ -45,7 +45,7 @@ int	scope;
     return sym_p;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-PUBLIC	void	discard_symbol( sym )
+	void	discard_symbol( sym )
 symbol	*sym;
 {
     /* Discard a single symbol structure and any attached links and args. Note
@@ -68,7 +68,7 @@ symbol	*sym;
     }
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-PUBLIC	void	discard_symbol_chain(sym)   /* Discard an entire cross-linked */
+	void	discard_symbol_chain(sym)   /* Discard an entire cross-linked */
 symbol	*sym;				    /* chain of symbols.              */
 {
     symbol *p = sym;
@@ -81,7 +81,7 @@ symbol	*sym;				    /* chain of symbols.              */
     }
 }
 /*----------------------------------------------------------------------*/
-PUBLIC link	*new_link( )
+ link	*new_link( )
 {
     /* Return a new link. It's initialized to zeros, so it's a declarator.
      * LCHUNK nodes are allocated from malloc() at one time.
@@ -110,7 +110,7 @@ PUBLIC link	*new_link( )
     return p;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-PUBLIC  void	discard_link_chain( p )
+  void	discard_link_chain( p )
 link    *p;
 {
     /* Discard all links in the chain. Nothing is removed from the structure
@@ -131,14 +131,14 @@ link    *p;
     }
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC	void	discard_link( p )		 /* Discard a single link. */
+	void	discard_link( p )		 /* Discard a single link. */
 link	*p;
 {
     p->next    = Link_free;
     Link_free  = p;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	structdef *new_structdef( tag )		/* Allocate a new structdef. */
+	structdef *new_structdef( tag )		/* Allocate a new structdef. */
 char	*tag;
 {
     structdef *sdef_p;
@@ -157,7 +157,7 @@ char	*tag;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 #ifdef STRUCTS_ARE_DISCARDED  /* they aren't in the present compiler */
 
-PUBLIC	void	discard_structdef( sdef_p )
+	void	discard_structdef( sdef_p )
 structdef	*sdef_p;
 {
     /* Discard a structdef and any attached fields, but don't discard linked
@@ -173,7 +173,7 @@ structdef	*sdef_p;
 }
 #endif
 
-PUBLIC	void	add_declarator( sym, type )
+	void	add_declarator( sym, type )
 symbol	*sym;
 int	type;
 {
@@ -203,7 +203,7 @@ int	type;
     }
 }
 
-PUBLIC void spec_cpy( dst, src ) /* Copy all initialized fields in src to dst.*/
+ void spec_cpy( dst, src ) /* Copy all initialized fields in src to dst.*/
 link *dst, *src;
 {
     if( src->NOUN 	) dst->NOUN	= src->NOUN     ;
@@ -218,7 +218,7 @@ link *dst, *src;
 	memcpy( &dst->VALUE, &src->VALUE, sizeof(src->VALUE) );
 }
 
-PUBLIC	link  *clone_type( tchain, endp )
+	link  *clone_type( tchain, endp )
 link  *tchain;		/* input:  Type chain to duplicate.         	  */
 link  **endp;		/* output: Pointer to last node in cloned chain.  */
 {
@@ -250,7 +250,7 @@ link  **endp;		/* output: Pointer to last node in cloned chain.  */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	int	the_same_type( p1, p2, relax )
+	int	the_same_type( p1, p2, relax )
 link	*p1, *p2;
 int	relax;
 {
@@ -294,7 +294,7 @@ int	relax;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	int	get_sizeof( p )
+	int	get_sizeof( p )
 link	*p;
 {
     /* Return the size in bytes of an object of the the type pointed to by p.
@@ -323,7 +323,7 @@ link	*p;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	symbol	*reverse_links( sym )
+	symbol	*reverse_links( sym )
 symbol	*sym;
 {
     /* Go through the cross-linked chain of "symbols", reversing the direction
@@ -351,7 +351,7 @@ symbol	*sym;
     return previous;
 }
 
-PUBLIC	char	*sclass_str( class )	/* Return a string representing the */
+	char	*sclass_str( class )	/* Return a string representing the */
 int	class;				/* indicated storage class.	    */
 {
     return class==CONSTANT   ? "CON" :
@@ -363,7 +363,7 @@ int	class;				/* indicated storage class.	    */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	char	*oclass_str( class )	/* Return a string representing the */
+	char	*oclass_str( class )	/* Return a string representing the */
 int	class;				/* indicated output storage class.  */
 {
     return class==PUB ? "PUB"  :
@@ -374,7 +374,7 @@ int	class;				/* indicated output storage class.  */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	char	*noun_str( noun )	/* Return a string representing the */
+	char	*noun_str( noun )	/* Return a string representing the */
 int	noun;				/* indicated noun.		    */
 {
     return noun==INT	    ? "int"    :
@@ -386,7 +386,7 @@ int	noun;				/* indicated noun.		    */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC char  *attr_str( spec_p )	/* Return a string representing all */
+ char  *attr_str( spec_p )	/* Return a string representing all */
 specifier *spec_p;			/* attributes in a specifier other  */
 {					/* than the noun and storage class. */
     static char str[5];
@@ -402,7 +402,7 @@ specifier *spec_p;			/* attributes in a specifier other  */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	char	*type_str ( link_p )
+	char	*type_str ( link_p )
 link	*link_p;		       /* Return a string representing the    */
 {				       /* type represented by the link chain. */
     int		i;
@@ -467,7 +467,7 @@ link	*link_p;		       /* Return a string representing the    */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC char *tconst_str( type )
+ char *tconst_str( type )
 link	*type;		   	   /* Return a string representing the value  */
 {				   /* field at the end of the specified type  */
     static char buf[80];	   /* (which must be char*, char, int, long,  */
@@ -516,7 +516,7 @@ link	*type;		   	   /* Return a string representing the value  */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	char	*sym_chain_str( chain )
+	char	*sym_chain_str( chain )
 symbol	*chain;
 {
     /* Return a string listing the names of all symbols in the input chain (or
@@ -554,7 +554,7 @@ symbol	*chain;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void psym( sym_p, fp )			/* Print one symbol to fp. */
+ void psym( sym_p, fp )			/* Print one symbol to fp. */
 symbol	*sym_p;
 FILE	*fp;
 {
@@ -568,7 +568,7 @@ FILE	*fp;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	void pstruct( sdef_p, fp )	/* Print a structure definition to fp */
+	void pstruct( sdef_p, fp )	/* Print a structure definition to fp */
 structdef    *sdef_p;			/* including all the fields & types.  */
 FILE	     *fp;
 {
@@ -586,7 +586,7 @@ FILE	     *fp;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC void print_syms( filename )	/* Print the entire symbol table to   */
+ void print_syms( filename )	/* Print the entire symbol table to   */
 char	*filename;			/* the named file. Previous contents  */
 {					/* of the file (if any) are destroyed.*/
     FILE *fp;

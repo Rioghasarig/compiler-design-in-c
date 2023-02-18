@@ -9,7 +9,7 @@
 
 static  int getline  P((char **stringp, int n, FILE *stream));
 /*----------------------------------------------------------------------*/
-PUBLIC char	*get_expr( ANSI(void) )
+ char	*get_expr( ANSI(void) )
 {
     /* Input routine for nfa(). Gets a regular expression and the associated
      * string from the input stream. Returns a pointer to the input string
@@ -60,7 +60,7 @@ PUBLIC char	*get_expr( ANSI(void) )
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int getline( stringp, n, stream )
+ int getline( stringp, n, stream )
 char	**stringp;
 int	n;
 FILE	*stream;

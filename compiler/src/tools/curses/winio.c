@@ -14,9 +14,9 @@
  *--------------------------------------------------------
  */
 
-PRIVATE int Echo   = 1;		/* Echo enabled			  */
-PRIVATE int Crmode = 0;		/* If 1, use buffered input	  */
-PRIVATE int Nl	   = 1;		/* If 1, map \r to \n on input	  */
+ int Echo   = 1;		/* Echo enabled			  */
+ int Crmode = 0;		/* If 1, use buffered input	  */
+ int Nl	   = 1;		/* If 1, map \r to \n on input	  */
 				/* and map both to \n\r on output */
 void echo	() {  Echo = 1; }
 void noecho	() {  Echo = 0; }

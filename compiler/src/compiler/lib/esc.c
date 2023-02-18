@@ -5,14 +5,14 @@
 
 /* ESC.C	Map escape sequences to single characters */
 
-PRIVATE int hex2bin P(( int c ));
-PRIVATE int oct2bin P(( int c ));
+ int hex2bin P(( int c ));
+ int oct2bin P(( int c ));
 /*------------------------------------------------------------*/
 
 #define ISHEXDIGIT(x) (isdigit(x)||('a'<=(x)&&(x)<='f')||('A'<=(x)&&(x)<='F'))
 #define ISOCTDIGIT(x) ('0'<=(x) && (x)<='7')
 
-PRIVATE int hex2bin(c)
+ int hex2bin(c)
 int	c;
 {
     /* Convert the hex digit represented by 'c' to an int. 'c' must be one of
@@ -21,7 +21,7 @@ int	c;
     return (isdigit(c) ? (c)-'0': ((toupper(c))-'A')+10)  & 0xf;
 }
 
-PRIVATE int oct2bin(c)
+ int oct2bin(c)
 int	c;
 {
     /* Convert the hex digit represented by 'c' to an int. 'c' must be a
@@ -32,7 +32,7 @@ int	c;
 
 /*------------------------------------------------------------*/
 
-PUBLIC  int	esc(s)
+  int	esc(s)
 char	**s;
 {
     /* Map escape sequences into their equivalent symbols. Return the equivalent

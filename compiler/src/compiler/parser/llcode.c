@@ -57,12 +57,12 @@ static  void make_yy_sact	P(( void ));
 static  void make_acts		P(( SYMBOL *lhs ));
 static  void make_yy_act	P(( void  ));
 /*----------------------------------------------------------------------*/
-PRIVATE int	*Dtran;		/* Internal representation of the parse table.
+ int	*Dtran;		/* Internal representation of the parse table.
 				 * Initialization in make_yy_dtran() assumes
 				 * that it is an int (it calls memiset).
 				 */
 /*----------------------------------------------------------------------*/
-PUBLIC void	tables()
+ void	tables()
 {
 	/* Print the various tables needed by the parser.  */
 
@@ -96,7 +96,7 @@ PUBLIC void	tables()
  *  cells.
  */
 
-PRIVATE	void	fill_row( lhs )
+	void	fill_row( lhs )
 SYMBOL	*lhs; 			/* Current left-hand side  */
 {
     PRODUCTION  *prod;
@@ -126,7 +126,7 @@ SYMBOL	*lhs; 			/* Current left-hand side  */
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	make_pushtab( lhs )
+	void	make_pushtab( lhs )
 SYMBOL	*lhs;
 {
      /* Make the pushtab. The right-hand sides are output in reverse order
@@ -142,7 +142,7 @@ SYMBOL	*lhs;
     sp = &stack[-1] ;
     for( prod = lhs->productions ; prod ; prod = prod->next )
     {
-	output( "YYPRIVATE int Yyp%02d[]={ ", prod->num );
+	output( "YY int Yyp%02d[]={ ", prod->num );
 
 	for( sym = prod->rhs, i = prod->rhs_len ; --i >= 0  ;)
 	    *++sp = *sym++ ;
@@ -154,7 +154,7 @@ SYMBOL	*lhs;
     }
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PRIVATE	void	make_yy_pushtab()
+	void	make_yy_pushtab()
 {
     /* Print out yy_pushtab. */
 
@@ -175,7 +175,7 @@ PRIVATE	void	make_yy_pushtab()
     comment( Output, text );
     ptab   ( Symtab, (ptab_t) make_pushtab, NULL, 0 );
 
-    output(  "\nYYPRIVATE int  *Yy_pushtab[] =\n{\n");
+    output(  "\nYY int  *Yy_pushtab[] =\n{\n");
 
     for( i = 0; i < maxprod; i++ )
 	    output(  "\tYyp%02d,\n", i );
@@ -183,7 +183,7 @@ PRIVATE	void	make_yy_pushtab()
     output( "\tYyp%02d\n};\n", maxprod );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	make_yy_dtran( )
+	void	make_yy_dtran( )
 {
     /* Print the DFA transition table.  */
 
@@ -235,7 +235,7 @@ PRIVATE	void	make_yy_dtran( )
 
     if( Uncompressed )
     {
-	fprintf( Output,"YYPRIVATE YY_TTYPE  %s[ %d ][ %d ] =\n",
+	fprintf( Output,"YY YY_TTYPE  %s[ %d ][ %d ] =\n",
 						DTRAN, nnonterms, nterms );
 
 	print_array( Output, Dtran, nnonterms, nterms );
@@ -256,7 +256,7 @@ PRIVATE	void	make_yy_dtran( )
     output("\n\n");
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	make_yy_synch()
+	void	make_yy_synch()
 {
     int	 mem ;	/* current member of synch set  */
     int	 i;	/* number of members in set	*/
@@ -271,7 +271,7 @@ PRIVATE	void	make_yy_synch()
     };
 
     comment( Output, text );
-    output( "YYPRIVATE int  Yy_synch[] =\n{\n" );
+    output( "YY int  Yy_synch[] =\n{\n" );
 
     i = 0;
     for( next_member(NULL); (mem = next_member(Synch)) >= 0 ;)
@@ -287,7 +287,7 @@ PRIVATE	void	make_yy_synch()
     next_member( NULL );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	make_yy_snonterm()
+	void	make_yy_snonterm()
 {
     register int  i;
 
@@ -317,7 +317,7 @@ PRIVATE	void	make_yy_snonterm()
     output(  "};\n\n" );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void	make_yy_sact()
+	void	make_yy_sact()
 {
     /* This subroutine generates the subroutine that implements the actions.  */
 
@@ -346,7 +346,7 @@ PRIVATE	void	make_yy_sact()
     output("\n};\n");
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void make_acts( lhs )
+	void make_acts( lhs )
 SYMBOL	*lhs;			/* Current left-hand side  */
 {
     /* This subroutine is called indirectly from yy_act, through the subroutine
@@ -421,7 +421,7 @@ SYMBOL	*lhs;			/* Current left-hand side  */
     output(  "\n                break;\n" );
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PRIVATE	void	make_yy_act()
+	void	make_yy_act()
 {
     /* Print all the acts inside a subroutine called yy_act() */
 
@@ -434,7 +434,7 @@ PRIVATE	void	make_yy_act()
 
     static char	*top[] =
     {
-	"YYPRIVATE int yy_act( actnum )",
+	"YY int yy_act( actnum )",
 	"int actnum;",
 	"{",
 	"    /* The actions. Returns 0 normally but a nonzero error code can",

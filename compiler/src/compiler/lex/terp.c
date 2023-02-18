@@ -10,10 +10,10 @@
 /*----------------------------------------------------------------------*/
 #define LARGEST_INT  (int)(((unsigned)(~0)) >> 1)
 
-PRIVATE	NFA  *Nfa;			/* Base address of NFA array	*/
-PRIVATE	int  Nfa_states;    		/* Number of states in NFA	*/
+	NFA  *Nfa;			/* Base address of NFA array	*/
+	int  Nfa_states;    		/* Number of states in NFA	*/
 /*----------------------------------------------------------------------*/
-PUBLIC int nfa( input_routine )
+ int nfa( input_routine )
 char	*(*input_routine)P((void));
 {
     /* Compile the NFA and initialize the various global variables used by
@@ -28,11 +28,11 @@ char	*(*input_routine)P((void));
     return( sstate - Nfa );
 }
 /*----------------------------------------------------------------------*/
-PUBLIC void free_nfa()
+ void free_nfa()
 {
     free( Nfa );
 }
-PUBLIC  SET  *e_closure( input, accept, anchor )
+  SET  *e_closure( input, accept, anchor )
 SET	*input   ;
 char	**accept ;
 int	*anchor  ;
@@ -120,7 +120,7 @@ abort:
 
     return input;
 }
-PUBLIC  SET *move( inp_set, c )
+  SET *move( inp_set, c )
 SET	*inp_set;			/* input set			*/
 int	c;				/* transition on this character */
 {
@@ -165,9 +165,9 @@ int	c;				/* transition on this character */
 
 #define BSIZE	256
 
-PRIVATE char	Buf[ BSIZE ];	/* input buffer				*/
-PRIVATE char	*Pbuf = Buf;	/* current position in input buffer	*/
-PRIVATE char	*Expr;		/* regular expression from command line */
+ char	Buf[ BSIZE ];	/* input buffer				*/
+ char	*Pbuf = Buf;	/* current position in input buffer	*/
+ char	*Expr;		/* regular expression from command line */
 
 int	nextchar( ANSI(void) )
 {
@@ -180,13 +180,13 @@ int	nextchar( ANSI(void) )
     return *Pbuf++;
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PRIVATE void	printbuf( ANSI(void) )
+ void	printbuf( ANSI(void) )
 {
     fputs(Buf, stdout);		/* Print the buffer and force a read	*/
     *Pbuf = 0;			/* on the next call to nextchar().	*/
 }
 /*--------------------------------------------------------------*/
-PRIVATE char	*getline( ANSI(void) )
+ char	*getline( ANSI(void) )
 {
     static int	first_time_called = 1;
     if( !first_time_called )

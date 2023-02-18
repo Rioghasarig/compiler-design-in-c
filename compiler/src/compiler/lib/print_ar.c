@@ -12,7 +12,7 @@ typedef int	 ATYPE;
 #define NCOLS	 10   	/* Number of columns used to print arrays	*/
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void	print_array( fp, array, nrows, ncols )
+	void	print_array( fp, array, nrows, ncols )
 FILE	*fp;
 ATYPE 	*array;			/* DFA transition table			*/
 int	nrows;			/* Number of rows    in array[]		*/

@@ -10,7 +10,7 @@
 #include "date.h"	/* Otherwise use ANSI __DATE__ */
 #endif
 
-PUBLIC void signon()
+ void signon()
 {
     /* Print the sign-on message. Note that since the console is opened
      * explicitly, the message is printed even if both stdout and stderr are

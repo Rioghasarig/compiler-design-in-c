@@ -351,7 +351,7 @@ diff of yydebug.c
 < 
 < /*----------------------------------------------------------------------*/
 < 
-< PRIVATE  FILE	*to_log( buf )
+<   FILE	*to_log( buf )
 < char	*buf;
 < {
 <     /* Set up everything to log output to a file (open the log file, etc.). */
@@ -421,7 +421,7 @@ diff of yydebug.c
 > 
 > /*----------------------------------------------------------------------*/
 > 
-> PRIVATE  FILE	*to_log( buf )
+>   FILE	*to_log( buf )
 > char	*buf;
 > {
 >     /* Set up everything to log output to a file (open the log file, etc.). */

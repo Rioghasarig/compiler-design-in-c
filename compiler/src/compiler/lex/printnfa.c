@@ -6,15 +6,15 @@
 #include <tools/compiler.h>
 #include "nfa.h"
 
-PRIVATE  void	printccl	P(( SET*		));
-PRIVATE  char	*plab		P(( NFA*, NFA*		));
-PUBLIC   void	print_nfa	P(( NFA*, int, NFA*	));
+  void	printccl	P(( SET*		));
+  char	*plab		P(( NFA*, NFA*		));
+   void	print_nfa	P(( NFA*, int, NFA*	));
 
 /*--------------------------------------------------------------
  *  PRINTNFA.C	Routine to print out a NFA structure in human-readable form.
  */
 
-PRIVATE void	printccl( set )
+ void	printccl( set )
 SET	*set;
 {
     static int	i;
@@ -36,7 +36,7 @@ SET	*set;
 
 /*--------------------------------------------------------------*/
 
-PRIVATE  char	*plab( nfa, state )
+  char	*plab( nfa, state )
 NFA	*nfa, *state ;
 {
     /* Return a pointer to a buffer containing the state number. The buffer is
@@ -55,7 +55,7 @@ NFA	*nfa, *state ;
 
 /*--------------------------------------------------------------*/
 
-PUBLIC  void	print_nfa( nfa, len, start )
+  void	print_nfa( nfa, len, start )
 NFA	*nfa, *start;
 int	len;
 {

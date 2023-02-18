@@ -15,7 +15,7 @@
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	stab  *new_stab( val, label )
+	stab  *new_stab( val, label )
 value	*val;
 int	label;
 {
@@ -41,7 +41,7 @@ int	label;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void	add_case( p, on_this, go_here )
+	void	add_case( p, on_this, go_here )
 stab	*p;
 int	on_this;
 int	go_here;
@@ -62,7 +62,7 @@ int	go_here;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void	add_default_case( p, go_here )
+	void	add_default_case( p, go_here )
 stab	*p;
 int	go_here;
 {
@@ -76,7 +76,7 @@ int	go_here;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void	gen_stab_and_free_table( p )
+	void	gen_stab_and_free_table( p )
 stab *p;
 {
     /* Generate the selector code at the bottom of the switch. This routine is

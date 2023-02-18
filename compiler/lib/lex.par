@@ -13,13 +13,13 @@
 /* YY_TTYPE is used for the DFA transition table: Yy_nxt[], declared below.
  * YYF marks failure transitions in the DFA transition table. There's no failure
  * state in the table itself, these transitions must be handled by the driver
- * program. The DFA start state is State 0. YYPRIVATE is only defined here only
+ * program. The DFA start state is State 0. YY is only defined here only
  * if it hasn't be #defined earlier. I'm assuming that if NULL is undefined,
  * <stdio.h> hasn't been included.
  */
 
-#ifndef YYPRIVATE
-#       define YYPRIVATE static
+#ifndef YY
+#       define YY static
 #endif
 
 #ifndef NULL

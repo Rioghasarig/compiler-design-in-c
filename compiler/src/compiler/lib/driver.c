@@ -9,16 +9,16 @@
 
 /*------------------------------------------------------------*/
 
-PUBLIC FILE *driver_1  P((  FILE *output, int line,  char *file_name	));
-PUBLIC int   driver_2  P((  FILE *output, int line			));
+ FILE *driver_1  P((  FILE *output, int line,  char *file_name	));
+ int   driver_2  P((  FILE *output, int line			));
 
-PRIVATE FILE *Input_file = NULL ;
-PRIVATE int  Input_line;	   /* line number of most-recently read line */
-PRIVATE char File_name[80];	   /* template-file name		     */
+ FILE *Input_file = NULL ;
+ int  Input_line;	   /* line number of most-recently read line */
+ char File_name[80];	   /* template-file name		     */
 
 /*------------------------------------------------------------*/
 
-PUBLIC FILE *driver_1( output, lines, file_name )
+ FILE *driver_1( output, lines, file_name )
 FILE	*output;
 int	lines;
 char	*file_name;
@@ -46,7 +46,7 @@ char	*file_name;
 
 /*--------------------------------------------------------------*/
 
-PUBLIC int driver_2( output, lines )
+ int driver_2( output, lines )
 FILE	*output;
 int	lines;
 {

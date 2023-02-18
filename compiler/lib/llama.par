@@ -60,8 +60,8 @@ typedef unsigned char   YY_TTYPE;	/* Type used for tables. 	*/
 #    define YYABORT return(1)	/* Action taken when input is rejected.	     */
 #endif
 
-#ifndef YYPRIVATE
-#    define YYPRIVATE static	/* Define to a null string to make public.   */
+#ifndef YY
+#    define YY static	/* Define to a null string to make public.   */
 #endif
 
 #ifndef YYMAXERR
@@ -93,7 +93,7 @@ YY_TTYPE yy_next ( int cur_state, unsigned c );
 static int yyabort P((void)) { exit(1); BCC( return 0; ) }
 
 #undef   yystk_cls
-#define  yystk_cls YYPRIVATE
+#define  yystk_cls YY
 #undef   yystk_err
 #define  yystk_err(o)  ((o) ? (yyerror("Stack overflow\n" ),yyabort()) \
 			    : (yyerror("Stack underflow\n"),yyabort()) )
@@ -134,8 +134,8 @@ int   yynerrs    = 0;		/* Error count.	 			 */
 
 yystk_dcl( Yy_dstack, char *, YYMAXDEPTH );
 
-ANSI( YYPRIVATE char *yy_sym( int sym )	)
-KnR ( YYPRIVATE char *yy_sym(     sym )	)
+ANSI( YY char *yy_sym( int sym )	)
+KnR ( YY char *yy_sym(     sym )	)
 KnR ( int sym;				)
 {
     /* Return a pointer to a string representing the symbol, using the
@@ -157,8 +157,8 @@ KnR ( int sym;				)
  * condition is met.
  */
 
-ANSI( YYPRIVATE  void yy_push(int x, YYSTYPE val) 	)
-KnR ( YYPRIVATE  void yy_push(    x,         val) 	)
+ANSI( YY  void yy_push(int x, YYSTYPE val) 	)
+KnR ( YY  void yy_push(    x,         val) 	)
 KnR ( int	   x;   )		    /* Push this onto the state stack.*/
 KnR ( YYSTYPE	   val;	)		    /* Push this onto the value stack.*/
 {
@@ -172,7 +172,7 @@ KnR ( YYSTYPE	   val;	)		    /* Push this onto the value stack.*/
     yy_pstack( 0, 1 );
 }
 
-YYPRIVATE int yy_pop P((void))
+YY int yy_pop P((void))
 {
     int prev_tos = yypop( Yy_stack  );
     ++Yy_vsp;
@@ -183,8 +183,8 @@ YYPRIVATE int yy_pop P((void))
     return prev_tos;
 }
 
-ANSI( YYPRIVATE void yy_say_whats_happening(int tos_item, int production) )
-KnR ( YYPRIVATE void yy_say_whats_happening(    tos_item,     production) )
+ANSI( YY void yy_say_whats_happening(int tos_item, int production) )
+KnR ( YY void yy_say_whats_happening(    tos_item,     production) )
 KnR ( int tos_item;   	) /* Item at top of stack 		  */
 KnR ( int production; 	) /* production number we're about to apply */
 {
@@ -348,8 +348,8 @@ KnR ( char  *fmt;			)
  *  ERROR RECOVERY:
  */
 
-ANSI( YYPRIVATE yy_in_synch( int sym )	)
-KnR ( YYPRIVATE yy_in_synch( sym )	)
+ANSI( YY yy_in_synch( int sym )	)
+KnR ( YY yy_in_synch( sym )	)
 KnR ( int sym;				)
 {
     /*  Return 1 if sym is in the synchronization set defined in Yy_synch. */
@@ -362,8 +362,8 @@ KnR ( int sym;				)
     return 0;
 }
 
-ANSI( YYPRIVATE yy_synch( int lookahead )	)
-KnR ( YYPRIVATE yy_synch( lookahead 	)	)
+ANSI( YY yy_synch( int lookahead )	)
+KnR ( YY yy_synch( lookahead 	)	)
 KnR ( int sym;					)
 {
    /* Recover from an error by trying to synchronize the input stream and the

@@ -25,11 +25,11 @@ typedef int	 ATYPE;	     /* Declared type of input tables		*/
 
 #define NCOLS	 10   	     /* Number of columns used to print arrays	*/
 #define TYPE	 "YY_TTYPE"  /* Declared type of output tables.		*/
-#define SCLASS   "YYPRIVATE" /* Storage class of all the tables		*/
-#define D_SCLASS "YYPRIVATE" /* Storage class of the decoding routine	*/
+#define SCLASS   "YY" /* Storage class of all the tables		*/
+#define D_SCLASS "YY" /* Storage class of the decoding routine	*/
 /*----------------------------------------------------------------------*/
 
-PUBLIC	int  pairs( fp, array, nrows, ncols, name, threshold, numbers )
+	int  pairs( fp, array, nrows, ncols, name, threshold, numbers )
 
 FILE    *fp;	   		/* output file				*/
 ATYPE	*array;			/* DFA transition table		 	*/
@@ -135,7 +135,7 @@ int	numbers;		/* Use numbers for char. part of pair	*/
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void	pnext( fp, name )
+	void	pnext( fp, name )
 char	*name;
 FILE	*fp;
 {

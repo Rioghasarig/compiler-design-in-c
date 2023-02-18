@@ -128,8 +128,8 @@ extern int  ii_plineno() ;
 #    define YYABORT return(1)	                                       	       
 #endif
 
-#ifndef YYPRIVATE
-#    define YYPRIVATE static	                                               
+#ifndef YY
+#    define YY static	                                               
 #endif
 
 #ifndef YYMAXERR
@@ -160,7 +160,7 @@ extern int  ii_plineno() ;
 #endif
 
 
-#define yystk_cls YYPRIVATE		       				     
+#define yystk_cls YY		       				     
 
                                                                          
                                                                             
@@ -195,10 +195,10 @@ typedef short 	YY_TTYPE;
 #if !defined(YYACTION) || !defined(YYPARSER)
 #    define YYP               
 #else
-#    define YYP   YYPRIVATE
+#    define YYP   YY
 #endif
 
-YYPRIVATE int	  yynerrs = 0;			                                
+YY int	  yynerrs = 0;			                                
 
 typedef int yyt_Yy_stack; yystk_cls yyt_Yy_stack Yy_stack[YYMAXDEPTH]; yystk_cls yyt_Yy_stack (*yyp_Yy_stack) = Yy_stack + (YYMAXDEPTH); 	                                
 
@@ -232,7 +232,7 @@ void	 yy_reduce	P(( int prod_num, int amount			  ));
   @ third part of the input file.     					@
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-YYPRIVATE YY_TTYPE  yy_next( table, cur_state, inp )
+YY YY_TTYPE  yy_next( table, cur_state, inp )
 YY_TTYPE  **table;
 YY_TTYPE  cur_state;
 int       inp;
@@ -353,7 +353,7 @@ KnR ( char	*fmt;				)
 
 
 
-YYPRIVATE  void yy_shift( new_state, lookahead )          	        
+YY  void yy_shift( new_state, lookahead )          	        
 int	    new_state;				                        
 int	    lookahead;				                        
 {
@@ -368,7 +368,7 @@ int	    lookahead;
 #endif
 }
                                                                           
-YYPRIVATE void yy_reduce( prod_num, amount )
+YY void yy_reduce( prod_num, amount )
 int	prod_num;		                             		      
 int	amount;			                                              
 {
@@ -404,7 +404,7 @@ int	amount;
 
                                                                           
 
-YYPRIVATE void yy_init_stack()			                            
+YY void yy_init_stack()			                            
 {
     ( (yyp_Yy_stack) = (Yy_stack + sizeof(Yy_stack)/sizeof(*Yy_stack)) );
     ( *--yyp_Yy_stack = (0) );		                      	   
@@ -419,7 +419,7 @@ YYPRIVATE void yy_init_stack()
 #   endif
 }
                                                                           
-YYPRIVATE int yy_recover( tok, suppress )
+YY int yy_recover( tok, suppress )
 int	tok;		                              		  
 int	suppress;	                                          
 {

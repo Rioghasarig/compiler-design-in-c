@@ -27,15 +27,15 @@ int	c_identifier	P(( char *name				));
 /*----------------------------------------------------------------------*/
 extern int	yylineno;		/* Input line number--created by LeX. */
 
-PRIVATE char	Field_name[NAME_MAX];	/* Field name specified in <name>.    */
-PRIVATE int	Goal_symbol_is_next =0; /* If true, the next nonterminal is   */
+ char	Field_name[NAME_MAX];	/* Field name specified in <name>.    */
+ int	Goal_symbol_is_next =0; /* If true, the next nonterminal is   */
 					/* the goal symbol.		      */
 #ifdef OCCS
-PRIVATE int 	Associativity;		/* Current associativity direction.   */
-PRIVATE int     Prec_lev = 0;		/* Precedence level. Incremented      */
+ int 	Associativity;		/* Current associativity direction.   */
+ int     Prec_lev = 0;		/* Precedence level. Incremented      */
 					/* after finding %left, etc.,	      */
 					/* but before the names are done.     */
-PRIVATE int	Fields_active = 0;	/* Fields are used in the input.      */
+ int	Fields_active = 0;	/* Fields are used in the input.      */
 					/* (If they're not, then automatic    */
 					/* field-name generation, as per      */
 #endif					/* %union, is not activated.)         */
@@ -69,7 +69,7 @@ CUR_SYM	Stack[ SSIZE ], 	 /* Stack and 				    */
 #pragma argsused
 #endif
 
-PUBLIC	void print_tok( stream, format, arg )
+	void print_tok( stream, format, arg )
 FILE	*stream;
 char	*format;		/* not used here but supplied by pset() */
 int	arg;
@@ -90,7 +90,7 @@ int	arg;
  * from the symbol table, respectively.
  */
 
-PUBLIC	void pterm( sym, stream )
+	void pterm( sym, stream )
 SYMBOL  *sym;
 FILE	*stream;
 {
@@ -110,7 +110,7 @@ FILE	*stream;
 #   endif
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void pact( sym, stream )
+	void pact( sym, stream )
 SYMBOL  *sym;
 FILE	*stream;
 {
@@ -123,7 +123,7 @@ FILE	*stream;
     fprintf( stream, "\n");
 }
 /*----------------------------------------------------------------------*/
-PUBLIC  char *production_str( prod )
+  char *production_str( prod )
 PRODUCTION   *prod;
 {
     /* return a string representing the production */
@@ -154,7 +154,7 @@ PRODUCTION   *prod;
     return buf;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void pnonterm( sym, stream )
+	void pnonterm( sym, stream )
 SYMBOL  *sym;
 FILE	*stream;
 {
@@ -221,7 +221,7 @@ FILE	*stream;
     fprintf(stream, "\n");
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void print_symbols( stream )
+	void print_symbols( stream )
 FILE	*stream;
 {
     /* Print out the symbol table. Nonterminal symbols come first for the sake
@@ -263,7 +263,7 @@ FILE	*stream;
  * symbols that are used but not defined.
  */
 
-PRIVATE	void find_problems( sym )
+	void find_problems( sym )
 SYMBOL  *sym;
 {
     if( !sym->used && sym!=Goal_symbol )
@@ -274,7 +274,7 @@ SYMBOL  *sym;
 						    sym->name, sym->used );
 }
 
-PUBLIC	int problems()
+	int problems()
 {
     /* Find, and print an error message, for all symbols that are used but not
      * defined, and for all symbols that are defined but not used. Return the
@@ -290,7 +290,7 @@ PUBLIC	int problems()
     * the field:
     */
 #ifdef NEVER
-  PRIVATE int hash_funct( p )
+   int hash_funct( p )
   SYMBOL *p;
   {
       if( !*p->name )
@@ -300,7 +300,7 @@ PUBLIC	int problems()
   }
 #endif
 
-PUBLIC	void init_acts()
+	void init_acts()
 {
     /* Various initializations that can't be done at compile time. Call this
      * routine before starting up the parser. The hash-table size (157) is
@@ -318,7 +318,7 @@ PUBLIC	void init_acts()
     LL( Synch  	 = newset(); )
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	SYMBOL *make_term( name )		 /* Make a terminal symbol */
+	SYMBOL *make_term( name )		 /* Make a terminal symbol */
 char	*name;
 {
     SYMBOL	*p;
@@ -346,7 +346,7 @@ char	*name;
     return p;
 }
 /*----------------------------------------------------------------------*/
-PRIVATE c_identifier( name )		/* Return true only if name is  */
+ c_identifier( name )		/* Return true only if name is  */
 char	*name;				/* a legitimate C identifier.	*/
 {
     if( isdigit( *name ) )
@@ -359,7 +359,7 @@ char	*name;				/* a legitimate C identifier.	*/
     return 1;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC void	first_sym()
+ void	first_sym()
 {
     /*  This routine is called just before the first rule following the
      *  %%. It's used to point out the goal symbol;
@@ -368,7 +368,7 @@ PUBLIC void	first_sym()
     Goal_symbol_is_next = 1;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC  SYMBOL	*new_nonterm( name, is_lhs )
+  SYMBOL	*new_nonterm( name, is_lhs )
 char	*name;
 int	is_lhs;
 {
@@ -435,7 +435,7 @@ LL(	    p->follow = newset();	)
     return p;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void new_rhs()
+	void new_rhs()
 {
     /* Get a new PRODUCTION and link it to the head of the production chain.
      * of the current nonterminal. Note that the start production MUST be
@@ -461,7 +461,7 @@ PUBLIC	void new_rhs()
     Sp->rhs = p;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void add_to_rhs( object, is_an_action )
+	void add_to_rhs( object, is_an_action )
 char	*object;
 int	is_an_action;	/* 0 of not an action, line number otherwise */
 {
@@ -556,7 +556,7 @@ int	is_an_action;	/* 0 of not an action, line number otherwise */
 #pragma argsused
 #endif
 
-PUBLIC	void start_opt( lex )	/* Start an optional subexpression    */
+	void start_opt( lex )	/* Start an optional subexpression    */
 char	*lex;			/* not used at present, but might be. */
 {
 	char   name[32];
@@ -569,7 +569,7 @@ char	*lex;			/* not used at present, but might be. */
 	new_rhs();			      /* and production for sub-prod. */
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC  void end_opt( lex )			/* end optional subexpression */
+  void end_opt( lex )			/* end optional subexpression */
 char	*lex;
 {
         char    *name = Sp->lhs_name ;
@@ -600,7 +600,7 @@ char	*lex;
 
 #ifdef LLAMA
 
-PUBLIC	void add_synch( name )
+	void add_synch( name )
 char	*name;
 {
     /*  Add "name" to the set of synchronization tokens
@@ -618,7 +618,7 @@ char	*name;
 	ADD( Synch, p->val );
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC void new_lev( how )
+ void new_lev( how )
 int how;
 {
     switch( how )
@@ -630,7 +630,7 @@ int how;
     }
 }
 
-PUBLIC void prec( name )
+ void prec( name )
 char *name;
 {
     lerror( NONFATAL, "%%prec %s not recognized by LLAMA\n", name );
@@ -640,7 +640,7 @@ char *name;
 #pragma argsused
 #endif
 
-PUBLIC void union_def( action )
+ void union_def( action )
 char	*action;
 {
     lerror(NONFATAL,"%%union not recognized by LLAMA\n");
@@ -650,11 +650,11 @@ char	*action;
 #pragma argsused
 #endif
 
-PUBLIC void prec_list( name ) char *name;
+ void prec_list( name ) char *name;
 {
 }
 
-PUBLIC void new_field( field_name )
+ void new_field( field_name )
 char	*field_name;
 {
     if( *field_name )
@@ -667,13 +667,13 @@ char	*field_name;
 #pragma argsused
 #endif
 
-PUBLIC void add_synch(yytext)
+ void add_synch(yytext)
 char *yytext;
 {
     lerror(NONFATAL, "%%synch not supported by OCCS\n");
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC void new_lev( how )
+ void new_lev( how )
 int how;
 {
     /* Increment the current precedence level and modify "Associativity"
@@ -684,7 +684,7 @@ int how;
 	++Prec_lev;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC void prec_list( name )
+ void prec_list( name )
 char	*name;
 {
     /* Add current name (in yytext) to the precision list. "Associativity" is
@@ -707,7 +707,7 @@ char	*name;
     }
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC void prec( name )
+ void prec( name )
 char *name;
 {
     /* Change the precedence level for the current right-hand side, using
@@ -732,7 +732,7 @@ char *name;
     }
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC void union_def( action )
+ void union_def( action )
 char	*action;
 {
     /*  create a YYSTYPE definition for the union, using the fields specified
@@ -756,13 +756,13 @@ char	*action;
     Fields_active = 1;
 }
 
-ANSI( PUBLIC	int fields_active( void )	)
-KnR ( PUBLIC	int fields_active(      )	)
+ANSI( 	int fields_active( void )	)
+KnR ( 	int fields_active(      )	)
 {
     return Fields_active ;		/* previous %union was specified */
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PUBLIC  void new_field( field_name )
+  void new_field( field_name )
 char	*field_name;
 {
     /* Change the name of the current <field> */

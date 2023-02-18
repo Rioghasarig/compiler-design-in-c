@@ -14,11 +14,11 @@
 
 /*----------------------------------------------------------------------*/
 					/* For statistics only:		     */
-PRIVATE int	Nitems		= 0;	/* number of LR(1) items	     */
-PRIVATE int	Npairs		= 0;	/* # of pairs in output tables	     */
-PRIVATE int	Ntab_entries	= 0;	/* number of transitions in tables    */
-PRIVATE int	Shift_reduce    = 0;	/* number of shift/reduce conflicts  */
-PRIVATE int	Reduce_reduce   = 0;	/* number of reduce/reduce conflicts */
+ int	Nitems		= 0;	/* number of LR(1) items	     */
+ int	Npairs		= 0;	/* # of pairs in output tables	     */
+ int	Ntab_entries	= 0;	/* number of transitions in tables    */
+ int	Shift_reduce    = 0;	/* number of shift/reduce conflicts  */
+ int	Reduce_reduce   = 0;	/* number of reduce/reduce conflicts */
 
 #define MAXSTATE   512    /* Max # of LALR(1) states.			*/
 #define MAXOBUF	   256    /* Buffer size for various output routines	*/
@@ -71,16 +71,16 @@ typedef struct act_or_goto
 
 typedef ACT GOTO;		/* GOTO is an alias for ACT */
 
-PRIVATE ACT *Actions[MAXSTATE];	/* Array of pointers to the head of the action
+ ACT *Actions[MAXSTATE];	/* Array of pointers to the head of the action
 			         * chains. Indexed by state number.
 			 	 * I'm counting on initialization to NULL here.
 			         */
-PRIVATE GOTO *Gotos[MAXSTATE]; 	/* Array of pointers to the head of the goto
+ GOTO *Gotos[MAXSTATE]; 	/* Array of pointers to the head of the goto
 			 	 * chains.
 			 	 */
 #define CHUNK	   128		 /* New() gets this many structures at once */
-PRIVATE HASH_TAB *States      = NULL;	/* LR(1) states 		 */
-PRIVATE int	 Nstates      = 0;	/* Number of states.	 	 */
+ HASH_TAB *States      = NULL;	/* LR(1) states 		 */
+ int	 Nstates      = 0;	/* Number of states.	 	 */
 
 #define MAX_UNFINISHED	128
 
@@ -92,17 +92,17 @@ typedef struct tnode
 } TNODE;
 
 
-PRIVATE TNODE	Heap[ MAX_UNFINISHED ]; /* Source of all TNODEs		  */
-PRIVATE TNODE	*Next_allocate = Heap ; /* Ptr to next node to allocate   */
+ TNODE	Heap[ MAX_UNFINISHED ]; /* Source of all TNODEs		  */
+ TNODE	*Next_allocate = Heap ; /* Ptr to next node to allocate   */
 
-PRIVATE TNODE	 *Available  = NULL;	/* Free list of available nodes   */
+ TNODE	 *Available  = NULL;	/* Free list of available nodes   */
 					/* linked list of TNODES. p->left */
 					/* is used as the link.		  */
-PRIVATE TNODE	 *Unfinished = NULL;	/* Tree of unfinished states.	  */
+ TNODE	 *Unfinished = NULL;	/* Tree of unfinished states.	  */
 
-PRIVATE ITEM	**State_items;		/* Used to pass info to state_cmp */
-PRIVATE int	State_nitems;		/* 		"		  */
-PRIVATE int	Sort_by_number = 0;	/*		"		  */
+ ITEM	**State_items;		/* Used to pass info to state_cmp */
+ int	State_nitems;		/* 		"		  */
+ int	Sort_by_number = 0;	/*		"		  */
 
 #define NEW	 0			/* Possible return values from 	  */
 #define UNCLOSED 1			/* newstate().			  */
@@ -111,13 +111,13 @@ PRIVATE int	Sort_by_number = 0;	/*		"		  */
 ITEM	*Recycled_items = NULL;
 
 #define MAX_TOK_PER_LINE  10
-PRIVATE int Tokens_printed;	/* Controls number of lookaheads printed */
+ int Tokens_printed;	/* Controls number of lookaheads printed */
 				/* on a single line of yyout.doc.	 */
 #ifdef DEBUG
 #ifdef __TURBOC__
 #pragma warn -use
 #endif
-PRIVATE char *strprod       P((PRODUCTION *prod				     ));
+ char *strprod       P((PRODUCTION *prod				     ));
 #endif
 void	add_action	  P(( int state, int input_sym, int do_this	     ));
 void	add_goto	  P(( int state, int nonterminal, int go_here	     ));
@@ -171,8 +171,8 @@ int	lr_conflicts	  P(( FILE *fp ));
 void	make_parse_tables P(( void     ));
 
 
-  ANSI( PRIVATE void	*new( void ) )
-  KnR ( PRIVATE ACT	*new() 	     )
+  ANSI(  void	*new( void ) )
+  KnR (  ACT	*new() 	     )
 
 {
     /* Return an area of memory that can be used as either an ACT or GOTO.
@@ -195,7 +195,7 @@ void	make_parse_tables P(( void     ));
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE ACT	*p_action( state, input_sym )
+ ACT	*p_action( state, input_sym )
 int state, input_sym;
 {
     /* Return a pointer to the existing ACT structure representing the indicated
@@ -216,7 +216,7 @@ int state, input_sym;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE void	add_action( state, input_sym, do_this )
+ void	add_action( state, input_sym, do_this )
 int state, input_sym, do_this;
 {
     /* Add an element to the action part of the parse table. The cell is
@@ -251,7 +251,7 @@ int state, input_sym, do_this;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE GOTO	*p_goto( state, nonterminal )
+ GOTO	*p_goto( state, nonterminal )
 int state, nonterminal;
 {
     /* Return a pointer to the existing GOTO structure representing the
@@ -277,7 +277,7 @@ int state, nonterminal;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE void	add_goto( state, nonterminal, go_here )
+ void	add_goto( state, nonterminal, go_here )
 int	state, nonterminal, go_here;
 {
     /* Add an element to the goto part of the parse table, the cell is indexed
@@ -317,7 +317,7 @@ int	state, nonterminal, go_here;
     Gotos[state] = p;
 }
 
-PRIVATE int	newstate( items, nitems, statep )
+ int	newstate( items, nitems, statep )
 ITEM	**items;
 int	nitems;
 STATE	**statep;
@@ -375,7 +375,7 @@ STATE	**statep;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void	add_unfinished( state )
+ void	add_unfinished( state )
 STATE	*state;
 {
     TNODE **parent, *root;
@@ -419,7 +419,7 @@ STATE	*state;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE STATE	*get_unfinished()
+ STATE	*get_unfinished()
 {
     /* Returns a pointer to the next unfinished state and deletes that
      * state from the unfinished tree. Returns NULL if the tree is empty.
@@ -470,7 +470,7 @@ PRIVATE STATE	*get_unfinished()
 #endif
 
 
-PRIVATE int	state_cmp( new, tab_node )
+ int	state_cmp( new, tab_node )
 STATE	*new ;				/*  Pointer to new node (ignored */
 					/*  if Sort_by_number is false). */
 STATE	*tab_node;			/*  Pointer to existing node	 */
@@ -508,7 +508,7 @@ STATE	*tab_node;			/*  Pointer to existing node	 */
 #pragma argsused
 #endif
 
-PRIVATE unsigned state_hash( sym )
+ unsigned state_hash( sym )
 STATE	*sym;				/* ignored */
 {
     /* Hash function for STATEs. Sum together production numbers and dot
@@ -526,7 +526,7 @@ STATE	*sym;				/* ignored */
 	total += (*items)->prod_num  +  (*items)->dot_posn;
     return total;
 }
-PRIVATE ITEM	*newitem( production )
+ ITEM	*newitem( production )
 PRODUCTION	*production;
 {
     ITEM       *item;
@@ -563,7 +563,7 @@ PRODUCTION	*production;
     return item;
 }
 
-PRIVATE void	freeitem( item )
+ void	freeitem( item )
 ITEM	*item;
 {
     --Nitems;
@@ -571,7 +571,7 @@ ITEM	*item;
     Recycled_items = item;
 }
 
-PRIVATE void	free_recycled_items()
+ void	free_recycled_items()
 {
     /* empty the recycling heap, freeing all memory used by items there */
 
@@ -584,7 +584,7 @@ PRIVATE void	free_recycled_items()
     }
 }
 
-PRIVATE void movedot( item )
+ void movedot( item )
 ITEM	*item;
 {
     /* Moves the dot one position to the right and updates the right_of_dot
@@ -597,7 +597,7 @@ ITEM	*item;
     item->right_of_dot = ( item->prod->rhs )[ ++item->dot_posn ] ;
 }
 
-PRIVATE int   item_cmp( item1p,  item2p )
+ int   item_cmp( item1p,  item2p )
 ITEM  **item1p, **item2p ;
 {
     /* Return the relative weight of two items, 0 if they're equivalent.  */
@@ -624,7 +624,7 @@ ITEM  **item1p, **item2p ;
     D( printf("item2->dot_posn  = %d\n", item2->dot_posn  );		      )
     D( printf("Returning %d\n\n",	 rval 		  );		      )
 #endif
-PUBLIC void	make_parse_tables()
+ void	make_parse_tables()
 {
     /* Prints an LALR(1) transition matrix for the grammar currently
      * represented in the symbol table.
@@ -690,7 +690,7 @@ PUBLIC void	make_parse_tables()
 
 		fprintf(fp, "#include <stdio.h>\n" );
 		fprintf(fp, "typedef short YY_TTYPE;\n" );
-		fprintf(fp, "#define YYPRIVATE %s\n",
+		fprintf(fp, "#define YY %s\n",
 					Public ? "/* empty */" : "static" );
 
 		print_tab( Actions, "Yya", "Yy_action", 0 );
@@ -706,7 +706,7 @@ PUBLIC void	make_parse_tables()
 
 
 
-PRIVATE int lr( cur_state )
+ int lr( cur_state )
 STATE  *cur_state;
 {
     /* Make LALR(1) state machine. The shifts and gotos are done here, the
@@ -835,7 +835,7 @@ STATE  *cur_state;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int 	merge_lookaheads( dst_items, src_items, nitems )
+ int 	merge_lookaheads( dst_items, src_items, nitems )
 ITEM	**src_items;
 ITEM	**dst_items;
 int	nitems;
@@ -875,7 +875,7 @@ int	nitems;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int	move_eps( cur_state, closure_items, nclose )
+ int	move_eps( cur_state, closure_items, nclose )
 STATE	*cur_state;
 ITEM	**closure_items;
 int	nclose;
@@ -929,7 +929,7 @@ int	nclose;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int   kclosure( kernel, closure_items, maxitems, nclose )
+ int   kclosure( kernel, closure_items, maxitems, nclose )
 STATE *kernel;			/* Kernel state to close.		   */
 ITEM  **closure_items;		/* Array into which closure items are put. */
 int   maxitems;			/* Size of the closure_items[] array.	   */
@@ -972,7 +972,7 @@ int   nclose;			/* # of items already in set.		   */
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int closure( kernel, closure_items, maxitems )
+ int closure( kernel, closure_items, maxitems )
 STATE *kernel;			/* Kernel state to close.		  */
 ITEM  *closure_items[];		/* Array into which closure items are put */
 int   maxitems;			/* Size of the closure_items[] array.	  */
@@ -1009,7 +1009,7 @@ int   maxitems;			/* Size of the closure_items[] array.	  */
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE int   do_close( item, closure_items, nitems, maxitems )
+ int   do_close( item, closure_items, nitems, maxitems )
 ITEM  *item;
 ITEM  *closure_items[];	/* (output) Array of items added by closure process */
 int   *nitems;		/* (input)  # of items currently in closure_items[] */
@@ -1095,7 +1095,7 @@ int   *maxitems;	/* (input)  max # of items that can be added        */
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE ITEM	  *in_closure_items(production, closure_item, nitems)
+ ITEM	  *in_closure_items(production, closure_item, nitems)
 PRODUCTION *production;
 ITEM	   **closure_item;
 int	   nitems;
@@ -1111,7 +1111,7 @@ int	   nitems;
     return NULL;
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PRIVATE int	add_lookahead( dst, src )
+ int	add_lookahead( dst, src )
 SET	*dst, *src;
 {
     /* Merge the lookaheads in the src and dst sets. If the original src
@@ -1127,7 +1127,7 @@ SET	*dst, *src;
 
     return 0;
 }
-PRIVATE void	reductions()
+ void	reductions()
 {
     /* Do the reductions. If there's memory, sort the table by state number */
     /* first so that yyout.doc will look nice.				    */
@@ -1143,7 +1143,7 @@ PRIVATE void	reductions()
 #pragma argsused
 #endif
 
-PRIVATE void addreductions( state, junk )
+ void addreductions( state, junk )
 STATE	*state;
 void	*junk;
 {
@@ -1178,7 +1178,7 @@ void	*junk;
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE void	reduce_one_item( state, item )
+ void	reduce_one_item( state, item )
 ITEM	*item;				/* Reduce on this item	*/
 STATE	*state;				/* from this state	*/
 {
@@ -1248,7 +1248,7 @@ STATE	*state;				/* from this state	*/
 	}
     }
 }
-PUBLIC void lr_stats( fp )
+ void lr_stats( fp )
 FILE	*fp;
 {
     /*  Print out various statistics about the table-making process */
@@ -1266,7 +1266,7 @@ FILE	*fp;
     fprintf(fp, "\n");
 }
 /*----------------------------------------------------------------------*/
-PUBLIC int lr_conflicts( fp )
+ int lr_conflicts( fp )
 FILE	*fp;
 {
     /* Print out statistics for the inadequate states and return the number of
@@ -1285,7 +1285,7 @@ FILE	*fp;
 #pragma argsused
 #endif
 
-PRIVATE void sprint_tok( bp, format, arg )
+ void sprint_tok( bp, format, arg )
 char	**bp;
 char	*format;		/* not used here, but supplied by pset() */
 int	arg;
@@ -1307,7 +1307,7 @@ int	arg;
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE  char 	*stritem( item, lookaheads )
+  char 	*stritem( item, lookaheads )
 ITEM	*item;
 int	lookaheads;
 {
@@ -1354,7 +1354,7 @@ int	lookaheads;
     return buf;
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void	pstate( state )
+ void	pstate( state )
 STATE	*state;
 {
     /* Print one row of the parse table in human-readable form yyout.doc
@@ -1410,7 +1410,7 @@ STATE	*state;
     document("\n");
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void	pstate_stdout( state )
+ void	pstate_stdout( state )
 STATE	*state;
 {
     document_to( stdout );
@@ -1418,7 +1418,7 @@ STATE	*state;
     document_to( NULL );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void pclosure( kernel, closure_items, nitems )
+ void pclosure( kernel, closure_items, nitems )
 STATE	*kernel;
 ITEM	**closure_items;
 int	nitems;
@@ -1434,7 +1434,7 @@ int	nitems;
     }
 }
 
-PRIVATE void	make_yy_lhs( prodtab )
+ void	make_yy_lhs( prodtab )
 PRODUCTION	**prodtab;
 {
     static char *text[] =
@@ -1448,7 +1448,7 @@ PRODUCTION	**prodtab;
     int		i;
 
     comment ( Output, text );
-    output  ( "YYPRIVATE int Yy_lhs[%d] =\n{\n", Num_productions );
+    output  ( "YY int Yy_lhs[%d] =\n{\n", Num_productions );
 
     for( i = 0; i < Num_productions; ++i )
     {
@@ -1466,7 +1466,7 @@ PRODUCTION	**prodtab;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void	make_yy_reduce( prodtab )
+ void	make_yy_reduce( prodtab )
 PRODUCTION	**prodtab;
 {
     static char *text[] =
@@ -1479,7 +1479,7 @@ PRODUCTION	**prodtab;
     int		i;
 
     comment ( Output, text );
-    output  ( "YYPRIVATE int Yy_reduce[%d] =\n{\n", Num_productions );
+    output  ( "YY int Yy_reduce[%d] =\n{\n", Num_productions );
 
     for( i = 0; i < Num_productions; ++i )
     {
@@ -1497,7 +1497,7 @@ PRODUCTION	**prodtab;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void make_yy_slhs( prodtab )
+ void make_yy_slhs( prodtab )
 PRODUCTION	**prodtab;
 {
     static char *text[] =
@@ -1512,7 +1512,7 @@ PRODUCTION	**prodtab;
     int		i;
 
     comment ( Output, text );
-    output  ( "YYPRIVATE char *Yy_slhs[%d] =\n{\n", Num_productions );
+    output  ( "YY char *Yy_slhs[%d] =\n{\n", Num_productions );
 
     for( i = Num_productions; --i >= 0 ; )
     {
@@ -1523,7 +1523,7 @@ PRODUCTION	**prodtab;
     output("};\n");
 }
 
-PRIVATE void make_yy_srhs( prodtab )
+ void make_yy_srhs( prodtab )
 PRODUCTION	**prodtab;
 {
     static char *text[] =
@@ -1538,7 +1538,7 @@ PRODUCTION	**prodtab;
     int		i, j;
 
     comment ( Output, text );
-    output  ( "YYPRIVATE char *Yy_srhs[%d] =\n{\n", Num_productions );
+    output  ( "YY char *Yy_srhs[%d] =\n{\n", Num_productions );
 
     for( i = Num_productions; --i >= 0 ; )
     {
@@ -1562,7 +1562,7 @@ PRODUCTION	**prodtab;
  * transition.
  */
 
-PRIVATE void	print_reductions()
+ void	print_reductions()
 {
     /* Output the various tables needed to do reductions */
 
@@ -1587,7 +1587,7 @@ PRIVATE void	print_reductions()
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void	mkprod( sym, prodtab )
+ void	mkprod( sym, prodtab )
 SYMBOL		*sym;
 PRODUCTION	**prodtab;
 {
@@ -1607,7 +1607,7 @@ PRODUCTION	**prodtab;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void	print_tab( table, row_name, col_name, make_private )
+ void	print_tab( table, row_name, col_name, make_private )
 ACT	**table;
 char	*row_name;	/* Name to use for the row arrays 	  	   */
 char	*col_name;	/* Name to use for the row-pointers array 	   */
@@ -1717,7 +1717,7 @@ int	make_private;	/* Make index table private (rows always private)  */
 	for( ele = *elep ; ele ; ele = ele->next )
 	    ++count;
 
-	output("YYPRIVATE YY_TTYPE %s%03d[]={%2d,", row_name,
+	output("YY YY_TTYPE %s%03d[]={%2d,", row_name,
 						(int)(elep-table), count);
 									   /*}*/
         column = 0;
@@ -1741,7 +1741,7 @@ int	make_private;	/* Make index table private (rows always private)  */
      */
 
     if( make_private )
-	output( "\nYYPRIVATE YY_TTYPE *%s[%d] =\n", col_name, Nstates );
+	output( "\nYY YY_TTYPE *%s[%d] =\n", col_name, Nstates );
     else
 	output( "\nYY_TTYPE *%s[%d] =\n", col_name, Nstates );
 
@@ -1770,7 +1770,7 @@ int	make_private;	/* Make index table private (rows always private)  */
 #pragma warn -use
 #endif
 
-PRIVATE  char 	*strprod( prod )
+  char 	*strprod( prod )
 PRODUCTION	*prod;
 {
     /* Return a pointer to a string that holds a representation

@@ -11,7 +11,7 @@
  * stderr.
  */
 
-PUBLIC	void yycomment( fmt  VA_LIST )
+	void yycomment( fmt  VA_LIST )
 char	*fmt;
 {
     /* Works like printf(). */
@@ -22,7 +22,7 @@ char	*fmt;
     va_end  ( args );
 }
 
-PUBLIC void yyerror( fmt  VA_LIST )
+ void yyerror( fmt  VA_LIST )
 char	*fmt;
 {
     /* Works like printf() but prints an error message along with the

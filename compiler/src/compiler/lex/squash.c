@@ -18,29 +18,29 @@
  * llama-generated tables so they're a little more complicated.
  */
 
-PRIVATE int	Col_map[ MAX_CHARS ];
-PRIVATE int	Row_map[ DFA_MAX   ];
+ int	Col_map[ MAX_CHARS ];
+ int	Row_map[ DFA_MAX   ];
 
 #define NCOLS	16
 #define TYPE	 "YY_TTYPE"  /* Declared type of output tables.		*/
-#define SCLASS   "YYPRIVATE" /* Storage class of all the tables		*/
+#define SCLASS   "YY" /* Storage class of all the tables		*/
 
 /*----------------------------------------------------------------------
  * Local statics. (Externs are declared in dfa.h.)
  */
 
-PRIVATE int col_equiv	P(( int *col1, int *col2,int nrows	));
-PRIVATE void col_cpy	P(( int *dest, int *src, int nrows, \
+ int col_equiv	P(( int *col1, int *col2,int nrows	));
+ void col_cpy	P(( int *dest, int *src, int nrows, \
 				          int n_src_cols, int n_dest_cols ));
-PRIVATE void reduce		P(( ROW *dtran, int *p_nrows,int *p_ncols ));
-PRIVATE void print_col_map	P(( FILE *fp				  ));
-PRIVATE void print_row_map	P(( FILE *fp,int nrows			  ));
-PRIVATE void pmap		P(( FILE *fp, int *p, int n		  ));
+ void reduce		P(( ROW *dtran, int *p_nrows,int *p_ncols ));
+ void print_col_map	P(( FILE *fp				  ));
+ void print_row_map	P(( FILE *fp,int nrows			  ));
+ void pmap		P(( FILE *fp, int *p, int n		  ));
 /*----------------------------------------------------------------------*/
 #define ROW_EQUIV(r1,r2,ncols)	(memcmp( r1, r2, ncols * sizeof(int))==0 )
 #define ROW_CPY(r1,r2,ncols)	(memcpy( r1, r2, ncols * sizeof(int))	 )
 /*----------------------------------------------------------------------*/
-PUBLIC  int	squash( fp, dtran, nrows, ncols, name )
+  int	squash( fp, dtran, nrows, ncols, name )
 FILE	*fp;
 ROW	*dtran;
 int	nrows, ncols;
@@ -67,7 +67,7 @@ char	*name;
 	    +(         oncols * sizeof(TTYPE)) );		/* col map */
 }
 /*----------------------------------------------------------------------*/
-PRIVATE  int col_equiv( col1, col2, nrows )
+  int col_equiv( col1, col2, nrows )
 int	*col1, *col2;
 int	nrows;
 {
@@ -81,7 +81,7 @@ int	nrows;
     return( !(nrows >= 0) );
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PRIVATE	void col_cpy( dest, src, nrows, n_src_cols, n_dest_cols )
+	void col_cpy( dest, src, nrows, n_src_cols, n_dest_cols )
 int	*dest;		/* Top of destination column			*/
 int	*src;		/* Top of source column				*/
 int	nrows;		/* Number of rows				*/
@@ -101,7 +101,7 @@ int	n_dest_cols;	/* Number of columns in destination array	*/
     }
 }
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-PRIVATE	void	reduce( dtran, p_nrows, p_ncols )
+	void	reduce( dtran, p_nrows, p_ncols )
 ROW	*dtran;			/* DFA transition table			*/
 int	*p_nrows;		/* # of states in dtran			*/
 int	*p_ncols;		/* Pointer to column count		*/
@@ -223,7 +223,7 @@ int	*p_ncols;		/* Pointer to column count		*/
     *p_nrows = r_nrows ;
 }
 /*----------------------------------------------------------------------*/
-PRIVATE	void print_col_map( fp )
+	void print_col_map( fp )
 FILE	*fp;
 {
     static char	*text[] =
@@ -250,7 +250,7 @@ FILE	*fp;
     pmap   (fp, Col_map, MAX_CHARS );
 }
 
-PRIVATE	void print_row_map( fp, nrows )
+	void print_row_map( fp, nrows )
 FILE	*fp;
 int	nrows;
 {
@@ -258,7 +258,7 @@ int	nrows;
     pmap   (fp, Row_map, nrows );
 }
 
-PRIVATE void pmap( fp, p, n )
+ void pmap( fp, p, n )
 FILE	*fp;					/* output stream    */
 int	*p;					/* pointer to array */
 int	n;					/* array size	    */
@@ -278,7 +278,7 @@ int	n;					/* array size	    */
     fprintf( fp, "%3d\n};\n\n", *p );
 }
 /*----------------------------------------------------------------------*/
-PUBLIC  void	cnext( fp, name )
+  void	cnext( fp, name )
 FILE	*fp;
 char	*name;
 {

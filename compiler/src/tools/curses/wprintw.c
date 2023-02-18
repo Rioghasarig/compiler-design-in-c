@@ -2,9 +2,9 @@
 #include "cur.h"
 #include <tools/prnt.h>
 
-PRIVATE int Errcode = OK;
+ int Errcode = OK;
 
-PRIVATE void wputc(c, win)
+ void wputc(c, win)
 int	c;
 WINDOW	*win;
 {

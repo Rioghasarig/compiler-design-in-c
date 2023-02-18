@@ -12,7 +12,7 @@ extern  void file_header	P(( void ));			/* public */
 extern  void code_header	P(( void ));
 extern  void driver		P(( void ));
 /*----------------------------------------------------------------------*/
-PRIVATE FILE	*Driver_file = stderr ;
+ FILE	*Driver_file = stderr ;
 
 /*----------------------------------------------------------------------
  * Routines in this file are llama specific. There's a different version
@@ -20,7 +20,7 @@ PRIVATE FILE	*Driver_file = stderr ;
  *----------------------------------------------------------------------
  */
 
-PUBLIC	void file_header()
+	void file_header()
 {
     /* This header is printed at the top of the output file, before
      * the definitions section is processed. Various #defines that
@@ -28,7 +28,7 @@ PUBLIC	void file_header()
      */
 
     if( Public )
-	output( "#define YYPRIVATE\n" );
+	output( "#define YY\n" );
 
     if( Debug )
 	output( "#define YYDEBUG\n" );
@@ -42,7 +42,7 @@ PUBLIC	void file_header()
 
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void	code_header()
+	void	code_header()
 {
     /* This header is output after the definitions section is processed,
      * but before any tables or the driver is processed.
@@ -61,7 +61,7 @@ PUBLIC	void	code_header()
     driver_2( Output, !No_lines );
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void	driver()
+	void	driver()
 {
     /* Print out the actual parser by copying the file llama.par
      * to the output file.

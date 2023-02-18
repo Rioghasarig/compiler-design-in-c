@@ -19,11 +19,11 @@
    #pragma comment(exestr,"(C)" __DATE__ "Allen I. Holub. All rights reserved.")
 #endif
 /*----------------------------------------------------------------------*/
-PRIVATE  void cmd_line_error P(( int usage, char *fmt, ...	));
-PRIVATE  void do_file	     P(( void 				));
-PRIVATE  void head	     P(( int suppress_output 		));
-PRIVATE  void tail	     P(( void 				));
-PRIVATE  void strip_comments P((char *string			));
+  void cmd_line_error P(( int usage, char *fmt, ...	));
+  void do_file	     P(( void 				));
+  void head	     P(( int suppress_output 		));
+  void tail	     P(( void 				));
+  void strip_comments P((char *string			));
 /*----------------------------------------------------------------------*/
 #define DTRAN_NAME  "Yy_nxt" 	/* Name used for DFA transition table. Up to */
 				/* 3 characters are appended to the end of   */
@@ -31,19 +31,19 @@ PRIVATE  void strip_comments P((char *string			));
 
 #define	E(x)   fprintf(stderr,"%s\n", x)
 
-PRIVATE int	Column_compress = 1;  /* Variables for command-line switches */
-PRIVATE int	No_compression  = 0;
-PRIVATE int	Threshold	= 4;
-PRIVATE int	No_header	= 0;
-PRIVATE int	Header_only	= 0;
+ int	Column_compress = 1;  /* Variables for command-line switches */
+ int	No_compression  = 0;
+ int	Threshold	= 4;
+ int	No_header	= 0;
+ int	Header_only	= 0;
 
 extern int	Verbose;		/* in globals.h	*/
 extern int	No_lines;		/* in globals.h	*/
 extern int	Lineno;		     	/* In globals.h, the line number   */
 				     	/* used to print #line directives. */
 /*----------------------------------------------------------------------*/
-ANSI(	PRIVATE	void	cmd_line_error( int usage, char *fmt, ... )	)
-KnR (	PRIVATE	void	cmd_line_error(     usage,       fmt      )	)
+ANSI(		void	cmd_line_error( int usage, char *fmt, ... )	)
+KnR (		void	cmd_line_error(     usage,       fmt      )	)
 KnR (	int	usage;							)
 KnR (	char	*fmt;							)
 {
@@ -86,8 +86,8 @@ KnR (	char	*fmt;							)
     va_end(args);
 }
 /*----------------------------------------------------------------------*/
-ANSI(	PUBLIC  void	lerror( int status, char *fmt, ... )	)
-KnR (	PUBLIC  void	lerror(     status,       fmt      )	)
+ANSI(	  void	lerror( int status, char *fmt, ... )	)
+KnR (	  void	lerror(     status,       fmt      )	)
 KnR (	int	status;						)
 KnR (	char	*fmt;						)
 {
@@ -105,7 +105,7 @@ KnR (	char	*fmt;						)
     va_end(args);
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void main( argc, argv )
+	void main( argc, argv )
 int	argc;
 char	**argv;
 {
@@ -175,7 +175,7 @@ char	**argv;
     exit    ( 0 );
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void do_file( )
+ void do_file( )
 {
     int	   nstates;		/* Number of DFA states	  	*/
     ROW	   *dtran;		/* Transition table	  	*/
@@ -211,7 +211,7 @@ PRIVATE void do_file( )
 
 	if( No_compression )		  		/* compressed tables */
 	{
-	    fprintf (Ofile ,"YYPRIVATE YY_TTYPE  %s[ %d ][ %d ] =\n",
+	    fprintf (Ofile ,"YY YY_TTYPE  %s[ %d ][ %d ] =\n",
 					    DTRAN_NAME, nstates, MAX_CHARS);
 
 	    print_array( Ofile, (int *)dtran, nstates, MAX_CHARS );
@@ -265,13 +265,13 @@ PRIVATE void do_file( )
  * on the line.
  */
 
-PRIVATE	void head( suppress_output )
+	void head( suppress_output )
 int suppress_output;
 {
     int  transparent = 0;	/* True if in a %{ %} block */
 
     if( !suppress_output  && Public )
-	fputs( "#define YYPRIVATE\n\n", Ofile );
+	fputs( "#define YY\n\n", Ofile );
 
     if( !No_lines )
 	fprintf( Ofile, "#line 1 \"%s\"\n", Input_file_name);
@@ -325,7 +325,7 @@ int suppress_output;
 	printmacs();
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void strip_comments( string )
+ void strip_comments( string )
 char	*string;
 {
     /* Scan through the string, replacing C-like comments with space
@@ -359,7 +359,7 @@ char	*string;
     }
 }
 /*----------------------------------------------------------------------*/
-PRIVATE void	tail()
+ void	tail()
 {
     fgets(Input_buf, MAXINP, Ifile);   /* Throw away the line that	*/
 				       /* had the %% on it.		*/

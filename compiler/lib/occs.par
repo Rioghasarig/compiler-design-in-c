@@ -76,8 +76,8 @@ extern int  ii_plineno() ;
 #    define YYABORT return(1)	/* Action taken when input is rejected.	     */
 #endif
 
-#ifndef YYPRIVATE
-#    define YYPRIVATE static	/* define to a null string to make public    */
+#ifndef YY
+#    define YY static	/* define to a null string to make public    */
 #endif
 
 #ifndef YYMAXERR
@@ -108,7 +108,7 @@ extern int  ii_plineno() ;
 #endif
 
 #undef  yystk_cls			/* redefine stack macros for local */
-#define yystk_cls YYPRIVATE		/* use.				   */
+#define yystk_cls YY		/* use.				   */
 
 /* ----------------------------------------------------------------------
  * #defines used in the tables. Note that the parsing algorithm assumes that
@@ -136,17 +136,17 @@ typedef short 	YY_TTYPE;
  *
  * If -p or -a was given to OCCS, make Yy_rhslen and Yy_val (the right-hand
  * side length and the value used for $$) public, regardless of the value of
- * YYPRIVATE (yylval is always public). Note that occs generates extern
+ * YY (yylval is always public). Note that occs generates extern
  * statements for these in yyacts.c (following the definitions section).
  */
 
 #if !defined(YYACTION) || !defined(YYPARSER)
 #    define YYP /* nothing  */
 #else
-#    define YYP   YYPRIVATE
+#    define YYP   YY
 #endif
 
-YYPRIVATE int	  yynerrs = 0;			 /* Number of errors.         */
+YY int	  yynerrs = 0;			 /* Number of errors.         */
 
 yystk_dcl( Yy_stack, int, YYMAXDEPTH ); 	 /* State stack.              */
 
@@ -180,7 +180,7 @@ void	 yy_reduce	P(( int prod_num, int amount			  ));
   @ third part of the input file.     					@
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-YYPRIVATE YY_TTYPE  yy_next( table, cur_state, inp )
+YY YY_TTYPE  yy_next( table, cur_state, inp )
 YY_TTYPE  **table;
 YY_TTYPE  cur_state;
 int       inp;
@@ -301,7 +301,7 @@ KnR ( char	*fmt;				)
 
 
 
-YYPRIVATE  void yy_shift( new_state, lookahead ) /* shift 	      */
+YY  void yy_shift( new_state, lookahead ) /* shift 	      */
 int	    new_state;				 /* push this state   */
 int	    lookahead;				 /* Current lookahead */
 {
@@ -316,7 +316,7 @@ int	    lookahead;				 /* Current lookahead */
 #endif
 }
 /*----------------------------------------------------------------------*/
-YYPRIVATE void yy_reduce( prod_num, amount )
+YY void yy_reduce( prod_num, amount )
 int	prod_num;		/* Reduce by this production 		    */
 int	amount;			/* # symbols on right-hand side of prod_num */
 {
@@ -352,7 +352,7 @@ int	amount;			/* # symbols on right-hand side of prod_num */
 
 /*----------------------------------------------------------------------*/
 
-YYPRIVATE void yy_init_stack()			/* Initialize the stacks  */
+YY void yy_init_stack()			/* Initialize the stacks  */
 {
     yystk_clear( Yy_stack );
     yypush_    ( Yy_stack,  0 );		/* State stack = 0    	 */
@@ -367,7 +367,7 @@ YYPRIVATE void yy_init_stack()			/* Initialize the stacks  */
 #   endif
 }
 /*----------------------------------------------------------------------*/
-YYPRIVATE int yy_recover( tok, suppress )
+YY int yy_recover( tok, suppress )
 int	tok;		/* token that caused the error		*/
 int	suppress;	/* No error message is printed if true  */
 {

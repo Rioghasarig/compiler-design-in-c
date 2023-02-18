@@ -50,7 +50,7 @@ typedef enum ERR_NUM
 } ERR_NUM;
 
 
-PRIVATE char	*Errmsgs[] =		/* Indexed by ERR_NUM */
+ char	*Errmsgs[] =		/* Indexed by ERR_NUM */
 {
     "Not enough memory for NFA",
     "Malformed regular expression",
@@ -75,21 +75,21 @@ typedef enum WARN_NUM
 } WARN_NUM;
 
 
-PRIVATE char	*Warnmsgs[] =		/* Indexed by WARN_NUM */
+ char	*Warnmsgs[] =		/* Indexed by WARN_NUM */
 {
     "Treating dash in [-...] as a literal dash",
     "Treating dash in [...-] as a literal dash"
 };
 
 
-PRIVATE NFA   *Nfa_states  ; 	     /* State-machine array		   */
-PRIVATE int   Nstates = 0  ;  	     /* # of NFA states in machine	   */
-PRIVATE int   Next_alloc;  	     /* Index of next element of the array */
+ NFA   *Nfa_states  ; 	     /* State-machine array		   */
+ int   Nstates = 0  ;  	     /* # of NFA states in machine	   */
+ int   Next_alloc;  	     /* Index of next element of the array */
 
 #define	SSIZE	32
 
-PRIVATE NFA   *Sstack[ SSIZE ];	     /* Stack used by new()		   */
-PRIVATE NFA   **Sp = &Sstack[ -1 ];  /* Stack pointer			   */
+ NFA   *Sstack[ SSIZE ];	     /* Stack used by new()		   */
+ NFA   **Sp = &Sstack[ -1 ];  /* Stack pointer			   */
 
 #define	STACK_OK()    ( INBOUNDS(Sstack, Sp) )     /* true if stack not  */
 						   /* full or empty	 */
@@ -113,7 +113,7 @@ typedef struct MACRO
 
 } MACRO;
 
-PRIVATE HASH_TAB *Macros; /* Symbol table for macro definitions */
+ HASH_TAB *Macros; /* Symbol table for macro definitions */
 typedef enum TOKEN
 {
     EOS = 1,		/*  end of string	*/
@@ -137,7 +137,7 @@ typedef enum TOKEN
 } TOKEN;
 
 
-PRIVATE TOKEN	Tokmap[] =
+ TOKEN	Tokmap[] =
 {
 /*  ^@  ^A  ^B  ^C  ^D  ^E  ^F  ^G  ^H  ^I  ^J  ^K  ^L  ^M  ^N	*/
      L,  L,  L,  L,  L,  L,  L,  L,  L,  L,  L,  L,  L,  L,  L,
@@ -176,48 +176,48 @@ PRIVATE TOKEN	Tokmap[] =
     OPEN_CURLY,  OR,  CLOSE_CURLY, L
 };
 
-PRIVATE char  *(*Ifunct) P((void)) ; /* Input function pointer		 */
-PRIVATE char  *Input  = "" ;	     /* Current position in input string */
-PRIVATE char  *S_input 	   ;  	     /* Beginning of input string	 */
-PRIVATE TOKEN Current_tok  ;  	     /* Current token		 	 */
-PRIVATE int   Lexeme	   ;  	     /* Value associated with LITERAL	 */
+ char  *(*Ifunct) P((void)) ; /* Input function pointer		 */
+ char  *Input  = "" ;	     /* Current position in input string */
+ char  *S_input 	   ;  	     /* Beginning of input string	 */
+ TOKEN Current_tok  ;  	     /* Current token		 	 */
+ int   Lexeme	   ;  	     /* Value associated with LITERAL	 */
 
 #define	MATCH(t)   (Current_tok == (t))
 
-PRIVATE void 	parse_err	P(( ERR_NUM type		));
-PRIVATE	void	warning		P(( WARN_NUM type		));
-PRIVATE void	errmsg		P(( int type, char **table, char *msgtype ));
-PRIVATE NFA 	*new		P(( void 			));
-PRIVATE void	discard		P(( NFA *nfa_to_discard		));
-PRIVATE char	*save		P(( char *str			));
-PRIVATE char	*get_macro	P(( char **namep		));
-PRIVATE void	print_a_macro	P(( MACRO *mac			));
-PRIVATE TOKEN	advance		P(( void 			));
-PRIVATE NFA	*machine	P(( void 			));
-PRIVATE NFA	*rule		P(( void 			));
-PRIVATE void	expr		P(( NFA **startp, NFA **endp	));
-PRIVATE void	cat_expr	P(( NFA **startp, NFA **endp	));
-PRIVATE int	first_in_cat	P(( TOKEN tok			));
-PRIVATE void	factor		P(( NFA **startp, NFA **endp	));
-PRIVATE void	term		P(( NFA **startp, NFA **endp	));
-PRIVATE void	dodash		P(( SET *set			));
+ void 	parse_err	P(( ERR_NUM type		));
+	void	warning		P(( WARN_NUM type		));
+ void	errmsg		P(( int type, char **table, char *msgtype ));
+ NFA 	*new		P(( void 			));
+ void	discard		P(( NFA *nfa_to_discard		));
+ char	*save		P(( char *str			));
+ char	*get_macro	P(( char **namep		));
+ void	print_a_macro	P(( MACRO *mac			));
+ TOKEN	advance		P(( void 			));
+ NFA	*machine	P(( void 			));
+ NFA	*rule		P(( void 			));
+ void	expr		P(( NFA **startp, NFA **endp	));
+ void	cat_expr	P(( NFA **startp, NFA **endp	));
+ int	first_in_cat	P(( TOKEN tok			));
+ void	factor		P(( NFA **startp, NFA **endp	));
+ void	term		P(( NFA **startp, NFA **endp	));
+ void	dodash		P(( SET *set			));
 
 
 
-PRIVATE	void	warning( type )
+	void	warning( type )
 WARN_NUM	type;			/* Print error mesage and arrow to */
 {
     errmsg( (int)type, Warnmsgs, "WARNING" );
 }
 
-PRIVATE	void	parse_err( type )
+	void	parse_err( type )
 ERR_NUM	type;				/* Print error mesage and arrow to */
 {
     errmsg( (int)type, Errmsgs, "ERROR" );
     exit(1);
 }
 
-PRIVATE void errmsg( type, table, msgtype )
+ void errmsg( type, table, msgtype )
 int  type;
 char **table;
 char *msgtype;
@@ -233,7 +233,7 @@ char *msgtype;
 
 /*--------------------------------------------------------------*/
 
-PRIVATE	NFA  *new()			/* NFA management functions */
+	NFA  *new()			/* NFA management functions */
 {
     NFA	*p;
     static int first_time = 1;
@@ -259,7 +259,7 @@ PRIVATE	NFA  *new()			/* NFA management functions */
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE	void	discard( nfa_to_discard )
+	void	discard( nfa_to_discard )
 NFA	*nfa_to_discard;
 {
     --Nstates;
@@ -274,7 +274,7 @@ NFA	*nfa_to_discard;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE char	*save( str )		/* String-management function. */
+ char	*save( str )		/* String-management function. */
 char	*str;
 {
     char	*textp, *startp;
@@ -323,7 +323,7 @@ char	*str;
 
 /*------------------------------------------------------------*/
 
-PUBLIC  void	new_macro( def )
+  void	new_macro( def )
 char	*def;
 {
     /* Add a new macro to the table. If two macros have the same name, the
@@ -388,7 +388,7 @@ char	*def;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE char	*get_macro( namep )
+ char	*get_macro( namep )
 char	**namep;
 {
     /* Return a pointer to the contents of a macro having the indicated
@@ -417,13 +417,13 @@ char	**namep;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE	void print_a_macro( mac )	/* Workhorse function needed by      */
+	void print_a_macro( mac )	/* Workhorse function needed by      */
 MACRO	*mac;				/* ptab() call in printmacs(), below */
 {
     printf( "%-16s--[%s]--\n", mac->name, mac->text );
 }
 
-PUBLIC void printmacs( ANSI(void) )	/* Print all the macros to stdout */
+ void printmacs( ANSI(void) )	/* Print all the macros to stdout */
 {
     if( !Macros )
 	printf("\tThere are no macros\n");
@@ -453,7 +453,7 @@ PUBLIC void printmacs( ANSI(void) )	/* Print all the macros to stdout */
  * the maximum macro-nesting depth.
  */
 
-PRIVATE	TOKEN	advance()
+	TOKEN	advance()
 {
     static int   inquote = 0;   	/* Processing quoted string	*/
     int	         saw_esc;       	/* Saw a backslash		*/
@@ -560,7 +560,7 @@ exit:
  *	as an array where the state number is the array index.
  */
 
-PRIVATE  NFA	*machine()
+  NFA	*machine()
 {
     NFA	*start;
     NFA	*p;
@@ -583,7 +583,7 @@ PRIVATE  NFA	*machine()
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE NFA  *rule()
+ NFA  *rule()
 {
     /*	rule	--> expr  EOS action
      *		    ^expr EOS action
@@ -643,7 +643,7 @@ PRIVATE NFA  *rule()
     return start;
 }
 
-PRIVATE	void expr( startp,  endp )
+	void expr( startp,  endp )
 NFA	**startp, **endp ;
 {
     /* Because a recursive descent compiler can't handle left recursion,
@@ -694,7 +694,7 @@ NFA	**startp, **endp ;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE	void cat_expr( startp,  endp )
+	void cat_expr( startp,  endp )
 NFA	**startp, **endp ;
 {
     /* The same translations that were needed in the expr rules are needed again
@@ -732,7 +732,7 @@ NFA	**startp, **endp ;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-PRIVATE	int	first_in_cat( tok )
+	int	first_in_cat( tok )
 TOKEN	tok;
 {
     switch( tok )
@@ -754,7 +754,7 @@ TOKEN	tok;
     return 1;
 }
 
-PRIVATE	void factor( startp, endp )
+	void factor( startp, endp )
 NFA	**startp, **endp;
 {
      /*		factor	--> term*  | term+  | term?
@@ -787,7 +787,7 @@ NFA	**startp, **endp;
     LEAVE("factor");
 }
 
-PRIVATE	void term( startp, endp )
+	void term( startp, endp )
 NFA	**startp, **endp;
 {
     /* Process the term productions:
@@ -865,7 +865,7 @@ NFA	**startp, **endp;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE	void	dodash( set )
+	void	dodash( set )
 SET	*set;				/* Pointer to ccl character set	*/
 {
     register int	first;
@@ -902,7 +902,7 @@ SET	*set;				/* Pointer to ccl character set	*/
 }
 
 
-PUBLIC  NFA	*thompson( input_function, max_state, start_state )
+  NFA	*thompson( input_function, max_state, start_state )
 char	*(*input_function) P((void));
 int	*max_state;
 NFA	**start_state;
@@ -950,7 +950,7 @@ NFA	**start_state;
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE pnode( nfa )	/* For debugging, print a single NFA structure */
+ pnode( nfa )	/* For debugging, print a single NFA structure */
 NFA	*nfa;
 {
     if( !nfa )
@@ -971,7 +971,7 @@ NFA	*nfa;
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE char	*getline()
+ char	*getline()
 {
     static char	buf[80];
 

@@ -1,18 +1,14 @@
 /*@A (C) 1992 Allen I. Holub                                                */
-#line 111 "0.tr"
 #ifndef __DEBUG_H	/* Makes sure that debug.h isn't included more than */
 #define __DEBUG_H	/* once. Matching endif is at end of file.	    */
 
 #ifdef  DEBUG
-#	define PRIVATE
 #	define D(x) x   /* expand only when debugging     */
 #	define ND(x)    /* expand only when not debugging */
 #else
-#	define PRIVATE static
 #	define D(x)
 #	define ND(x) x
 #endif
-#define PUBLIC
 
 #ifdef __TURBOC__	/* Compiling for Turbo/Borland C/C++	*/
 #    define BCC(x)  x	/* BCC(x) expands to its argument	*/
@@ -56,7 +52,7 @@
 #	define ANSI(x) x
 #	define _8086
 #	define VA_LIST  ,...
-#else				/* non-ansi (ie. UNIX) compiler */
+#else				/* Unix compiler */
 #	define BCC(x)
 #	define MSC(x)
 #	define MSC5(x)
@@ -78,11 +74,6 @@
 #	define raise(sig) kill( (int)getpid(), sig )
 #	define vfprintf(stream, fmt, argp) _doprnt( fmt, argp, stream )
 #	define vprintf (	fmt, argp) _doprnt( fmt, argp, stdout )
-
-	typedef long time_t;	 /* for the VAX, may have to change this */
-	typedef unsigned size_t; /* for the VAX, may have to change this */
-	extern char *strdup();	 /* You need to supply one.		*/
-	typedef int void;
 #endif /*  MSDOS   */
 #endif /*__TURBOC__*/
 

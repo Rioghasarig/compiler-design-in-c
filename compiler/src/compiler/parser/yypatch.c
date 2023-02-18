@@ -20,7 +20,7 @@ void print_one_case P(( int case_val, unsigned char *action, \
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int	Last_real_nonterm ;	/* This is the number of the last     */
+ int	Last_real_nonterm ;	/* This is the number of the last     */
 					/* nonterminal to appear in the input */
 					/* grammar [as compared to the ones   */
 					/* that patch() creates].	      */
@@ -52,7 +52,7 @@ PRIVATE int	Last_real_nonterm ;	/* This is the number of the last     */
   |
 #endif /*------------------------------------------------------------*/
 
-PUBLIC void patch()
+ void patch()
 {
     /*  This subroutine does several things:
      *
@@ -128,7 +128,7 @@ PUBLIC void patch()
    * and the string is attached to the new nonterminal).
    */
 
-PRIVATE void dopatch(sym)
+ void dopatch(sym)
 SYMBOL	*sym;
 {
     PRODUCTION  *prod;	   /* Current right-hand side of sym		    */
@@ -217,7 +217,7 @@ SYMBOL	*sym;
     }
 }
 
-PRIVATE	void print_one_case( case_val, action, rhs_size, lineno, prod )
+	void print_one_case( case_val, action, rhs_size, lineno, prod )
 int		case_val;  	    /* Numeric value attached to case itself.*/
 unsigned char	*action;   	    /* Source Code to execute in case.	     */
 int		rhs_size;  	    /* Number of symbols on right-hand side. */

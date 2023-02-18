@@ -11,26 +11,26 @@
 
 /* MINIMIZE.C:	Make a minimal DFA by eliminating equivalent states.  */
 
-PRIVATE SET  *Groups [ DFA_MAX ];  /* Groups of equivalent states in Dtran */
-PRIVATE int  Numgroups;	           /* Number of groups in Groups     	   */
-PRIVATE int  Ingroup [ DFA_MAX ];  /* the Inverse of Group		   */
+ SET  *Groups [ DFA_MAX ];  /* Groups of equivalent states in Dtran */
+ int  Numgroups;	           /* Number of groups in Groups     	   */
+ int  Ingroup [ DFA_MAX ];  /* the Inverse of Group		   */
 
 /*----------------------------------------------------------------------
  * Prototypes for subroutines in this file:
  */
 
-PRIVATE void 	fix_dtran	P(( ROW*[],          ACCEPT**		));
-PRIVATE void  	init_groups	P(( int,             ACCEPT* 		));
-PUBLIC	int 	min_dfa		P(( char *(*)(void), ROW*[],  ACCEPT**	));
-PRIVATE void 	minimize	P(( int,             ROW*[],  ACCEPT**	));
-PRIVATE void	pgroups		P(( int	       				));
+ void 	fix_dtran	P(( ROW*[],          ACCEPT**		));
+ void  	init_groups	P(( int,             ACCEPT* 		));
+	int 	min_dfa		P(( char *(*)(void), ROW*[],  ACCEPT**	));
+ void 	minimize	P(( int,             ROW*[],  ACCEPT**	));
+ void	pgroups		P(( int	       				));
 
 #ifdef DEBUG
-  PRIVATE void	setp		P(( SET*				));
+   void	setp		P(( SET*				));
 #endif
 /*----------------------------------------------------------------------*/
 
-PUBLIC	int min_dfa( ifunct, dfap, acceptp )
+	int min_dfa( ifunct, dfap, acceptp )
 char    *( *ifunct  )P((void));
 ROW     *( dfap[]   );
 ACCEPT  *( *acceptp );
@@ -51,7 +51,7 @@ ACCEPT  *( *acceptp );
     return Numgroups;
 }
 
-PRIVATE  void  init_groups( nstates, accept )
+  void  init_groups( nstates, accept )
 int	nstates;
 ACCEPT	*accept;
 {
@@ -104,7 +104,7 @@ match:;	/* Group already exists, keep going */
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void minimize( nstates, dfap, acceptp )
+ void minimize( nstates, dfap, acceptp )
 int	 nstates;		/* number of states in dtran[]		*/
 ROW	 *( dfap[]   );		/* DFA transition table to compress	*/
 ACCEPT	 *( *acceptp );		/* Set of accept states			*/
@@ -177,7 +177,7 @@ ACCEPT	 *( *acceptp );		/* Set of accept states			*/
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	void fix_dtran( dfap, acceptp )
+	void fix_dtran( dfap, acceptp )
 ROW	*( dfap[]  );
 ACCEPT	*( *acceptp );
 {
@@ -224,7 +224,7 @@ ACCEPT	*( *acceptp );
     *dfap    = newdtran  ;
     *acceptp = newaccept ;
 }
-PRIVATE void pgroups( nstates )
+ void pgroups( nstates )
 int	nstates ;
 {
     /* Print all the groups used for minimization.  */
@@ -252,7 +252,7 @@ int	nstates ;
     * called from the debugger if you like.
     */
 
-   PRIVATE void setp( set )
+    void setp( set )
    SET	*set;
    {
        pset( set, fprintf, stdout );

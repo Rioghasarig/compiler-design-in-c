@@ -13,7 +13,7 @@
 
 /* LOCAL.C Subroutines in this file take care of local-variable management.  */
 
-PRIVATE int	Offset = 0 ;	/* Offset from the frame pointer (which also */
+ int	Offset = 0 ;	/* Offset from the frame pointer (which also */
 				/* marks the base of the automatic-variable  */
 				/* region of the stack frame) to the most    */
 				/* recently allocated variable. Reset to 0   */

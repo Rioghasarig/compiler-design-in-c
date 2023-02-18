@@ -13,17 +13,17 @@
  */
 
 
-void	first_closure	P(( SYMBOL *lhs ));			/* local */
+ void	first_closure	P(( SYMBOL *lhs ));			/* local */
 
 void	first		P(( void ));				/* public */
 
 int	first_rhs	P(( SET *dest, SYMBOL **rhs, int len ));
 
-PRIVATE int Did_something;
+ int Did_something;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void first( )
+	void first( )
 {
     /* Construct FIRST sets for all nonterminal symbols in the symbol table.  */
 
@@ -39,7 +39,7 @@ PUBLIC	void first( )
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	void first_closure( lhs )
+	void first_closure( lhs )
 SYMBOL	*lhs;				/* Current left-hand side	*/
 {
     /* Called for every element in the FIRST sets. Adds elements to the first
@@ -99,7 +99,7 @@ SYMBOL	*lhs;				/* Current left-hand side	*/
 }
 
 /*----------------------------------------------------------------------*/
-PUBLIC	int	first_rhs( dest, rhs, len )
+	int	first_rhs( dest, rhs, len )
 SET		*dest;			/* Target set		*/
 SYMBOL		**rhs;			/* A right-hand side	*/
 int		len;			/* # of objects in rhs	*/

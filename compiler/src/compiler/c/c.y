@@ -41,7 +41,7 @@
 			/* parser. It is not printed anywhere in the book,   */
 			/* but is included on the distribution disk.	     */
 
-PRIVATE void clean_up P((void));
+ void clean_up P((void));
 %}
 /*----------------------------------------------------------------------*/
 
@@ -1154,7 +1154,7 @@ static  void init_output_streams P((char **p_code,char **p_data, char **p_bss));
 static  void sigint_handler	 P((void				     ));
 /*----------------------------------------------------------------------*/
 
-PRIVATE void init_output_streams( p_code, p_data, p_bss)
+ void init_output_streams( p_code, p_data, p_bss)
 char	**p_code, **p_data, **p_bss;
 {
     /* Initialize the output streams, making temporary files as necessary.
@@ -1191,7 +1191,7 @@ void	(*Osig) P((int));  /* Previous SIGINT handler.Initialized in 	*/
 			   /*				yy_init_occs().	*/
 #endif
 
-PRIVATE void sigint_handler()
+ void sigint_handler()
 {
     /* Ctrl-C handler. Note that the debugger raises SIGINT on a 'q' command,
      * so this routine is executed when you exit the debugger. Also, the
@@ -1214,7 +1214,7 @@ struct_cmp (s1, s2) structdef *s1, *s2; { return strcmp  (s1->tag,  s2->tag );}
 unsigned sym_hash     (s1)   symbol    *s1;  { return hash_pjw(s1->name ); }
 unsigned struct_hash  (s1)   structdef *s1;  { return hash_pjw(s1->tag  ); }
 
-PUBLIC  void	yy_init_occs( val )
+  void	yy_init_occs( val )
 void *val;				/* void* to match function prototype. */
 {					/* Exact match reqired by Borland C.  */
     Osig = signal( SIGINT, SIG_IGN );
@@ -1230,7 +1230,7 @@ void *val;				/* void* to match function prototype. */
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void clean_up()
+ void clean_up()
 {
     /* Cleanup actions. Mark the ends of the various segments, then merge the
      * three temporary files used for the code, data, and bss segments into a

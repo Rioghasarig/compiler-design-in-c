@@ -1,0 +1,5 @@
+Renamed files / folders to lowercase
+Removed stdarg.h and stdlib.h from include directory
+Removed typedefs in UNIX case of debug.h preprocessing commands
+Removed line aliasing at top of debug.h
+Removed "PRIVATE" and "PUBLIC" specifiers from all files

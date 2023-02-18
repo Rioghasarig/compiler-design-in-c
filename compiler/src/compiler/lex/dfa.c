@@ -30,22 +30,22 @@ typedef struct dfa_state
 } DFA_STATE;			/* this DFA state			*/
 
 
-PRIVATE DFA_STATE  *Dstates ;	/* DFA states table			*/
+ DFA_STATE  *Dstates ;	/* DFA states table			*/
 /*--------------------------------------------------------------*/
-PRIVATE	ROW 	   *Dtran   ;	/* DFA transition table 		   */
-PRIVATE	int	   Nstates  ;	/* Number of DFA states		    	   */
-PRIVATE DFA_STATE  *Last_marked;/* Most-recently marked DFA state in Dtran */
+	ROW 	   *Dtran   ;	/* DFA transition table 		   */
+	int	   Nstates  ;	/* Number of DFA states		    	   */
+ DFA_STATE  *Last_marked;/* Most-recently marked DFA state in Dtran */
 /*--------------------------------------------------------------
  * Prototypes for subroutines in this file:
  */
 
-PRIVATE DFA_STATE *get_unmarked	P(( void				));
-PRIVATE int	  in_dstates	P(( SET* NFA_set			));
-PRIVATE void	  free_sets	P(( void				));
-PRIVATE void 	  make_dtran	P(( int sstate 				));
-PUBLIC	int	  dfa		P(( char *(*inp)(void),ROW *rp[],ACCEPT **ap));
+ DFA_STATE *get_unmarked	P(( void				));
+ int	  in_dstates	P(( SET* NFA_set			));
+ void	  free_sets	P(( void				));
+ void 	  make_dtran	P(( int sstate 				));
+	int	  dfa		P(( char *(*inp)(void),ROW *rp[],ACCEPT **ap));
 
-PRIVATE int add_to_dstates P((SET *NFA_set, char *accept_string, int anchor));
+ int add_to_dstates P((SET *NFA_set, char *accept_string, int anchor));
    D( void ps		   P(( SET*	));	)
    D( void pstate	   P(( DFA_STATE * ));	)
 /*----------------------------------------------------------------------*/
@@ -117,7 +117,7 @@ ACCEPT	*(  *acceptp );
     return Nstates ;
 }
 
-PRIVATE	int add_to_dstates( NFA_set, accept_string, anchor )
+	int add_to_dstates( NFA_set, accept_string, anchor )
 SET	*NFA_set;
 char	*accept_string;
 int	anchor;
@@ -140,7 +140,7 @@ int	anchor;
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE  int	in_dstates( NFA_set )
+  int	in_dstates( NFA_set )
 SET	*NFA_set;
 {
     /* If there's a set in Dstates that is identical to NFA_set, return the
@@ -157,7 +157,7 @@ SET	*NFA_set;
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE DFA_STATE	*get_unmarked()
+ DFA_STATE	*get_unmarked()
 {
     /* Return a pointer to an unmarked state in Dstates. If no such state
      * exists, return NULL. Print an asterisk for each state to tell the
@@ -193,7 +193,7 @@ PRIVATE DFA_STATE	*get_unmarked()
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PRIVATE void	free_sets()
+ void	free_sets()
 {
     /* Free the memory used for the NFA sets in all Dstate entries.  */
 
@@ -204,7 +204,7 @@ PRIVATE void	free_sets()
 	delset( p->set );
 }
 
-PRIVATE	void	make_dtran( sstate )
+	void	make_dtran( sstate )
 int	sstate;				/* Starting NFA state.		    */
 {
     SET	       *NFA_set;		/* Set of NFA states that define    */
@@ -270,7 +270,7 @@ int	sstate;				/* Starting NFA state.		    */
 
 #ifdef DEBUG
 
-   PRIVATE	void ps( set )			   /* print a set with braces */
+   	void ps( set )			   /* print a set with braces */
    SET	*set;
    {
        putchar('{');
@@ -278,7 +278,7 @@ int	sstate;				/* Starting NFA state.		    */
        printf("}\n");
    }
 
-   PRIVATE	void	pstate( state )	   /* Prints a DFA_STATE structure */
+   	void	pstate( state )	   /* Prints a DFA_STATE structure */
    DFA_STATE  *state;
    {
        printf("Dstates[%ld] ", (long)( state - Dstates ) );

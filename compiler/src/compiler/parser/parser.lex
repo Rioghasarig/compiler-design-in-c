@@ -26,8 +26,8 @@
  * if Ignore. If Ignore is true, white space is ignored.
  */
 
-PRIVATE int   Ignore = 0;
-PRIVATE int   Start_line;	/* starting line number  */
+ int   Ignore = 0;
+ int   Start_line;	/* starting line number  */
 
 /* ----------------------------------------------------------------------
  *  Prototypes for functions at the bottom of this file:
@@ -224,16 +224,16 @@ c_name	[A-Za-z_][A-Za-z_0-9]*
 %%
 /*----------------------------------------------------------------------*/
 
-PUBLIC  void  nows()  { Ignore = 1; }     /* Ignore white space, etc.       */
-PUBLIC  void  ws  ()  { Ignore = 0; }     /* Don't ignore white space, etc. */
+  void  nows()  { Ignore = 1; }     /* Ignore white space, etc.       */
+  void  ws  ()  { Ignore = 0; }     /* Don't ignore white space, etc. */
 
-PUBLIC  int   start_action()    /* Return starting line number of most	*/
+  int   start_action()    /* Return starting line number of most	*/
 {				/* recently read ACTION block		*/
     return Start_line;
 }
 /*----------------------------------------------------------------------*/
 
-PRIVATE void stripcr( src )       /* Remove all \r's (but not \n's) from src. */
+ void stripcr( src )       /* Remove all \r's (but not \n's) from src. */
 char	*src;
 {
     char	*dest;
@@ -303,8 +303,8 @@ char	*src;
        }
    }
 
-   ANSI (PUBLIC void output( char *fmt,...) )
-   UNIX (PUBLIC void output( fmt )	    )	/* The real versions of these */
+   ANSI ( void output( char *fmt,...) )
+   UNIX ( void output( fmt )	    )	/* The real versions of these */
    UNIX (char	*fmt;			    )	/* subroutines are in main.c. */
    {						/* These stubs are here for   */
        va_list   args;				/* debugging a standalone     */
@@ -313,8 +313,8 @@ char	*src;
        fflush  ( Output );
    }
 
-   ANSI (PUBLIC void lerror( int status, char *fmt,...)	)
-   UNIX (PUBLIC void lerror( status, fmt )		)
+   ANSI ( void lerror( int status, char *fmt,...)	)
+   UNIX ( void lerror( status, fmt )		)
    UNIX (int	status;					)
    UNIX (char	*fmt;					)
    {

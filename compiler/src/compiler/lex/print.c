@@ -13,11 +13,11 @@
  *  everything except print the actual tables.
  */
 
-PUBLIC void pheader P(( FILE *fp,     ROW dtran[], int nrows, ACCEPT *accept ));
-PUBLIC void pdriver P(( FILE *output,              int nrows, ACCEPT *accept ));
+ void pheader P(( FILE *fp,     ROW dtran[], int nrows, ACCEPT *accept ));
+ void pdriver P(( FILE *output,              int nrows, ACCEPT *accept ));
 /*------------------------------------------------------------*/
 
-PUBLIC void pheader( fp, dtran, nrows, accept )
+ void pheader( fp, dtran, nrows, accept )
 FILE	*fp;			/* output stream			*/
 ROW	dtran[];		/* DFA transition table			*/
 int	nrows;			/* Number of states in dtran[]		*/
@@ -82,7 +82,7 @@ ACCEPT	*accept;		/* Set of accept states in dtran[]	*/
 
 /*--------------------------------------------------------------*/
 
-PUBLIC	void	pdriver( output, nrows, accept )
+	void	pdriver( output, nrows, accept )
 FILE	*output;
 int	nrows;		/* Number of states in dtran[]		*/
 ACCEPT	*accept;	/* Set of accept states in dtran[]	*/
@@ -102,7 +102,7 @@ ACCEPT	*accept;	/* Set of accept states in dtran[]	*/
     };
 
     comment( output, text );
-    fprintf(output, "YYPRIVATE YY_TTYPE  Yyaccept[] =\n" );
+    fprintf(output, "YY YY_TTYPE  Yyaccept[] =\n" );
     fprintf(output, "{\n"			         );
 
     for( i = 0 ; i < nrows ; i++ )			/* accepting array */

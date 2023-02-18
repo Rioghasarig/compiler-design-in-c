@@ -4,7 +4,7 @@
 #include <tools/debug.h>
 #include <tools/compiler.h>	/* needed only for prototype */
 
-PUBLIC	void	defnext(fp, name)
+	void	defnext(fp, name)
 FILE	*fp;
 char	*name;
 {

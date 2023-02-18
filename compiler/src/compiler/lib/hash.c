@@ -15,7 +15,7 @@
     */
 
 
-PUBLIC void *newsym( size )
+ void *newsym( size )
 int	size;
 {
     /* Allocate space for a new symbol; return a pointer to the user space. */
@@ -33,14 +33,14 @@ int	size;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC void freesym( sym )
+ void freesym( sym )
 void	*sym;
 {
     free( (BUCKET *)sym - 1 );
 }
 
 
-PUBLIC HASH_TAB	*maketab( maxsym, hash_function, cmp_function )
+ HASH_TAB	*maketab( maxsym, hash_function, cmp_function )
 unsigned 	maxsym;
 unsigned	(*hash_function)();
 int		(*cmp_function)();
@@ -71,7 +71,7 @@ UNIX(	p->cmp     =				  cmp_function  ; )
 }
 
 
-PUBLIC void *addsym( tabp, isym )
+ void *addsym( tabp, isym )
 HASH_TAB *tabp;
 void	 *isym;
 {
@@ -95,7 +95,7 @@ void	 *isym;
 }
 
 
-PUBLIC	void	delsym( tabp, isym )
+	void	delsym( tabp, isym )
 HASH_TAB *tabp;
 void	 *isym;
 {
@@ -118,7 +118,7 @@ void	 *isym;
 
 
 
-PUBLIC void 	*findsym( tabp, sym )
+ void 	*findsym( tabp, sym )
 HASH_TAB	*tabp;
 void		*sym;
 {
@@ -141,7 +141,7 @@ void		*sym;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC void    *nextsym( tabp, i_last )
+ void    *nextsym( tabp, i_last )
 HASH_TAB *tabp;
 void	 *i_last;
 {
@@ -159,9 +159,9 @@ void	 *i_last;
 }
 
 
-PRIVATE int (*User_cmp)(void*, void*);
+ int (*User_cmp)(void*, void*);
 
-PUBLIC int ptab( tabp, print, param, sort )
+ int ptab( tabp, print, param, sort )
 HASH_TAB *tabp;		/* Pointer to the table	      	      */
 ptab_t	 print;		/* Print function used for output     */
 void	 *param;	/* Parameter passed to print function */
@@ -238,7 +238,7 @@ int	 sort;		/* Sort the table if true.	      */
     return 1;
 }
 
-PRIVATE int internal_cmp( p1, p2 )
+ int internal_cmp( p1, p2 )
 BUCKET **p1, **p2;
 {
     return (*User_cmp)( (void*)(*p1 + 1), (void*)(*p2 + 1) );

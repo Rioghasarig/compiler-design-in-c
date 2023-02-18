@@ -33,32 +33,32 @@
 typedef unsigned char	uchar;
 
 
-PRIVATE  uchar  Start_buf[BUFSIZE]; /* Input buffer			*/
-PRIVATE	 uchar  *End_buf  = END;    /* Just past last character		*/
-PRIVATE  uchar	*Next  	  = END;    /* Next input character		*/
-PRIVATE  uchar	*sMark	  = END;    /* Start of current lexeme		*/
-PRIVATE  uchar	*eMark	  = END;    /* End of current lexeme		*/
-PRIVATE  uchar  *pMark	  = NULL;   /* Start of previous lexeme 	*/
-PRIVATE  int	pLineno	  = 0;	    /* Line # of previous lexeme	*/
-PRIVATE  int	pLength	  = 0;	    /* Length of previous lexeme	*/
+  uchar  Start_buf[BUFSIZE]; /* Input buffer			*/
+	 uchar  *End_buf  = END;    /* Just past last character		*/
+  uchar	*Next  	  = END;    /* Next input character		*/
+  uchar	*sMark	  = END;    /* Start of current lexeme		*/
+  uchar	*eMark	  = END;    /* End of current lexeme		*/
+  uchar  *pMark	  = NULL;   /* Start of previous lexeme 	*/
+  int	pLineno	  = 0;	    /* Line # of previous lexeme	*/
+  int	pLength	  = 0;	    /* Length of previous lexeme	*/
 
-PRIVATE  int	Inp_file  = STDIN;  /* Input file handle 		*/
-PRIVATE  int   	Lineno	  = 1  ;    /* Current line number	 	*/
-PRIVATE  int   	Mline	  = 1  ;    /* Line # when mark_end() called	*/
-PRIVATE  int	Termchar = 0;	    /* Holds the character that was	*/
+  int	Inp_file  = STDIN;  /* Input file handle 		*/
+  int   	Lineno	  = 1  ;    /* Current line number	 	*/
+  int   	Mline	  = 1  ;    /* Line # when mark_end() called	*/
+  int	Termchar = 0;	    /* Holds the character that was	*/
 				    /* overwritten by a \0 when we	*/
 				    /* null terminated the last		*/
 				    /* lexeme.				*/
-PRIVATE  int	Eof_read  = 0;	    /* End of file has been read.	*/
+  int	Eof_read  = 0;	    /* End of file has been read.	*/
 				    /* It's possible for this to be	*/
 				    /* true and for characters to	*/
 				    /* still be in the input buffer.	*/
 
 /* Pointers to open, close, and read functions */
 
-PRIVATE	int (*Openp) P((char*, int)) = (int(*)P((char*, int))) open;
-PRIVATE	int (*Closep) P((int)      ) =close;
-PRIVATE	int (*Readp)  P((int, void*, unsigned)) =read ;
+	int (*Openp) P((char*, int)) = (int(*)P((char*, int))) open;
+	int (*Closep) P((int)      ) =close;
+	int (*Readp)  P((int, void*, unsigned)) =read ;
 void	ii_io( open_funct, close_funct, read_funct )
 int  (*open_funct)  P(( char* name, int mode ));
 int  (*close_funct) P(( int handle ));
@@ -115,12 +115,12 @@ char	*name;
     }
     return fd;
 }
-PUBLIC uchar *ii_text        () { return( sMark	 	 ); }
-PUBLIC int    ii_length      () { return( eMark - sMark	 ); }
-PUBLIC int    ii_lineno      () { return( Lineno 	 ); }
-PUBLIC uchar *ii_ptext       () { return( pMark		 ); }
-PUBLIC int    ii_plength     () { return( pLength	 ); }
-PUBLIC int    ii_plineno     () { return( pLineno	 ); }
+ uchar *ii_text        () { return( sMark	 	 ); }
+ int    ii_length      () { return( eMark - sMark	 ); }
+ int    ii_lineno      () { return( Lineno 	 ); }
+ uchar *ii_ptext       () { return( pMark		 ); }
+ int    ii_plength     () { return( pLength	 ); }
+ int    ii_plineno     () { return( pLineno	 ); }
 
 uchar *ii_mark_start()
 {
@@ -129,13 +129,13 @@ uchar *ii_mark_start()
     return( sMark );
 }
 
-PUBLIC uchar *ii_mark_end()
+ uchar *ii_mark_end()
 {
     Mline = Lineno ;
     return( eMark = Next );
 }
 
-PUBLIC uchar *ii_move_start()
+ uchar *ii_move_start()
 {
     if ( sMark >= eMark )
 	return NULL;
@@ -143,7 +143,7 @@ PUBLIC uchar *ii_move_start()
 	return ++sMark ;
 }
 
-PUBLIC uchar *ii_to_mark()
+ uchar *ii_to_mark()
 {
     Lineno = Mline  ;
     return( Next  = eMark );
@@ -276,7 +276,7 @@ int	force;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	 int	ii_fillbuf( starting_at )
+	 int	ii_fillbuf( starting_at )
 unsigned char	 *starting_at;
 {
     /* Fill the input buffer from starting_at to the end of the buffer.

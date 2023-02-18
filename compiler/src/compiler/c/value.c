@@ -14,7 +14,7 @@
 
 /*  VALUE.C:	Routines to manipulate lvalues and rvalues. */
 
-PRIVATE value *Value_free = NULL;
+ value *Value_free = NULL;
 #define VCHUNK	8		/* Allocate this many structure at a time. */
 /*----------------------------------------------------------------------*/
 value	*new_value()
@@ -304,7 +304,7 @@ value	*src;				/* source to be converted	   */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	int	get_size( type )
+	int	get_size( type )
 link	*type;
 {
     /* Return the number of bytes required to hold the thing referenced by

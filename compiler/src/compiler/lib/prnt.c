@@ -14,7 +14,7 @@
 #if (0 ANSI(+1)) /*-----------------------------------------------------*/
 #include <stdarg.h>
 
-PUBLIC void prnt(   prnt_t	ofunct,		/* declared in prnt.h */
+ void prnt(   prnt_t	ofunct,		/* declared in prnt.h */
 		    void	*funct_arg,
 		    char	*format,
 		    va_list	args
@@ -27,7 +27,7 @@ PUBLIC void prnt(   prnt_t	ofunct,		/* declared in prnt.h */
 	(*ofunct)( *p, funct_arg );
 }
 
-PUBLIC void stop_prnt( void ){}
+ void stop_prnt( void ){}
 
 #else /* K&R C ---------------------------------------------------------------*/
 #include <varargs.h>
@@ -35,7 +35,7 @@ PUBLIC void stop_prnt( void ){}
 static FILE	*Tmp_file = NULL ;
 static char	*Tmp_name ;
 
-PUBLIC void prnt( ofunct, funct_arg, fmt, argp )
+ void prnt( ofunct, funct_arg, fmt, argp )
 int	(*ofunct)();
 void	*funct_arg;
 char	*fmt;
@@ -60,7 +60,7 @@ int	*argp;
     rewind( Tmp_file );
 }
 
-PUBLIC void  stop_prnt()
+ void  stop_prnt()
 {
     if( Tmp_file )
     {
@@ -78,27 +78,27 @@ PUBLIC void  stop_prnt()
 #undef vprintf
 #endif
 
-PUBLIC void vfprintf( stream, fmt, argp )
+ void vfprintf( stream, fmt, argp )
 FILE *stream;
 char *fmt, *argp;
 {
     _doprnt( fmt, argp, stream );
 }
 
-PUBLIC void vprintf( fmt, argp )
+ void vprintf( fmt, argp )
 char *fmt, *argp;
 {
     _doprnt( fmt, argp, stdout );
 }
 
-PRIVATE	void putstr(c, p)
+	void putstr(c, p)
 int	c;
 char	**p;
 {
     *(*p)++ = c ;
 }
 
-PUBLIC void vsprintf( str, fmt, argp )
+ void vsprintf( str, fmt, argp )
 char *str, *fmt, *argp;
 {
     prnt( putstr, &str, fmt, argp );

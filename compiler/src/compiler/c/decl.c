@@ -18,7 +18,7 @@
  *----------------------------------------------------------------------
  */
 
-PUBLIC	link	  *new_class_spec( first_char_of_lexeme )
+	link	  *new_class_spec( first_char_of_lexeme )
 int	first_char_of_lexeme;
 {
     /* Return a new specifier link with the sclass field initialized to hold
@@ -34,7 +34,7 @@ int	first_char_of_lexeme;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void	set_class_bit( first_char_of_lexeme, p )
+	void	set_class_bit( first_char_of_lexeme, p )
 int	first_char_of_lexeme;
 link	*p;
 {
@@ -67,7 +67,7 @@ link	*p;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	link	*new_type_spec( lexeme )
+	link	*new_type_spec( lexeme )
 char	*lexeme;
 {
     /* Create a new specifier and initialize the type according to the indicated
@@ -346,7 +346,7 @@ symbol  *sym;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void var_dcl( ofunct, c_code_sclass, sym, terminator )
+	void var_dcl( ofunct, c_code_sclass, sym, terminator )
 
 void   (* ofunct) P((char *,...));  /* output function (yybss or yydata). */
 int    c_code_sclass;	/* C-code storage class of symbol.		  */
@@ -492,7 +492,7 @@ link	*p;
     BCC( return 0; )	/* Keep the compiler happy */
 }
 
-PUBLIC void do_enum( sym, val )
+ void do_enum( sym, val )
 symbol	*sym;
 int	val;
 {
@@ -505,7 +505,7 @@ int	val;
     }
 }
 /*---------------------------------------------------------------------*/
-PUBLIC	int	conv_sym_to_int_const( sym, val )
+	int	conv_sym_to_int_const( sym, val )
 symbol  *sym;
 int	val;
 {

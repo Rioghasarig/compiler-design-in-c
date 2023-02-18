@@ -21,9 +21,9 @@
  *--------------------------------------------------------
  */
 
-PRIVATE int Save   = 1; 	/* Save image when window created	*/
-PRIVATE int Box	   = 0;	 	/* Windows are boxed		  	*/
-PRIVATE int Attrib = NORMAL;	/* Default character attribute byte	*/
+ int Save   = 1; 	/* Save image when window created	*/
+ int Box	   = 0;	 	/* Windows are boxed		  	*/
+ int Attrib = NORMAL;	/* Default character attribute byte	*/
 
 void save    () {  Save = 1;	}
 void nosave  () {  Save = 0;	}

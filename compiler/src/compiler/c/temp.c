@@ -20,10 +20,10 @@
 typedef int CELL;	/* In-use (Region) map is an array of these.	*/
 
 
-PRIVATE CELL	Region[REGION_MAX];
-PRIVATE CELL	*High_water_mark = Region;
+ CELL	Region[REGION_MAX];
+ CELL	*High_water_mark = Region;
 /*----------------------------------------------------------------------*/
-PUBLIC int tmp_alloc( size )
+ int tmp_alloc( size )
 int	size;				/* desired number of bytes */
 {
     /* Allocate a portion of the temporary-variable region of the required size,
@@ -78,7 +78,7 @@ int	size;				/* desired number of bytes */
 					  /* converted to bytes.	      */
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void tmp_free( offset )
+	void tmp_free( offset )
 int  offset;			   /* Release a temporary var.; offset should */
 {				   /* have been returned from tmp_alloc().    */
     CELL  *p  = Region + offset;
@@ -101,7 +101,7 @@ int  offset;			   /* Release a temporary var.; offset should */
 		;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void	tmp_reset()
+	void	tmp_reset()
 {
     /* Reset everything back to the virgin state, including the high-water mark.
      * This routine should be called just before a subroutine body is processed,
@@ -111,7 +111,7 @@ PUBLIC	void	tmp_reset()
     High_water_mark = Region ;
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	void	tmp_freeall()
+	void	tmp_freeall()
 {
     /* Free all temporaries currently in use (without modifying the high-water
      * mark). This subroutine should be called after processing arithmetic
@@ -121,7 +121,7 @@ PUBLIC	void	tmp_freeall()
     memset( Region, 0, sizeof(Region) );
 }
 /*----------------------------------------------------------------------*/
-PUBLIC	int	tmp_var_space()
+	int	tmp_var_space()
 {
     /* Return the total cumulative size of the temporary-variable region in
      * stack elements, not bytes. This number can be used as an argument to the

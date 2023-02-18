@@ -8,7 +8,7 @@
 #include  <tools/debug.h>
 #include  <tools/set.h>
 
-PUBLIC SET	*newset()
+ SET	*newset()
 {
     /* Create a new set and return a pointer to it. Print an error message
      * and raise SIGABRT if there's insufficient memory. NULL is returned
@@ -32,7 +32,7 @@ PUBLIC SET	*newset()
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC void	delset( set )
+ void	delset( set )
 SET	*set;
 {
     /* Delete a set created with a previous newset() call. */
@@ -44,7 +44,7 @@ SET	*set;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC SET	*dupset( set )
+ SET	*dupset( set )
 SET	*set;
 {
     /* Create a new set that has the same members as the input set */
@@ -80,7 +80,7 @@ SET	*set;
     return new;
 }
 
-PUBLIC int	_addset( set, bit )
+ int	_addset( set, bit )
 SET	*set;
 int	bit;
 {
@@ -94,7 +94,7 @@ int	bit;
     return _GBIT( set, bit, |= );
 }
 /* ------------------------------------------------------------------- */
-PRIVATE	void	enlarge( need, set )
+	void	enlarge( need, set )
 int	need;
 SET	*set;
 {
@@ -127,7 +127,7 @@ SET	*set;
     set->nbits  = need * _BITS_IN_WORD ;
 }
 
-PUBLIC int	num_ele( set )
+ int	num_ele( set )
 SET	*set;
 {
     /* Return the number of elements (nonzero bits) in the set. NULL sets are
@@ -171,7 +171,7 @@ SET	*set;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC int	_set_test( set1, set2 )
+ int	_set_test( set1, set2 )
 SET	*set1, *set2;
 {
     /* Compares two sets. Returns as follows:
@@ -216,7 +216,7 @@ SET	*set1, *set2;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC int setcmp( set1, set2 )
+ int setcmp( set1, set2 )
 SET *set1, *set2;
 {
     /* Yet another comparison function. This one works like strcmp(),
@@ -263,7 +263,7 @@ SET *set1, *set2;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC unsigned sethash( set1 )
+ unsigned sethash( set1 )
 SET *set1;
 {
     /* hash the set by summing together the words in the bit map */
@@ -284,7 +284,7 @@ SET *set1;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC int	subset( set, possible_subset )
+ int	subset( set, possible_subset )
 SET	*set, *possible_subset;
 {
     /* Return 1 if "possible_subset" is a subset of "set". One is returned if
@@ -323,7 +323,7 @@ SET	*set, *possible_subset;
     return 1;
 }
 
-PUBLIC void	_set_op( op, dest, src )
+ void	_set_op( op, dest, src )
 int	op;
 SET	*src, *dest;
 {
@@ -375,7 +375,7 @@ SET	*src, *dest;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC void	invert( set )
+ void	invert( set )
 SET	*set;
 {
     /* Physically invert the bits in the set. Compare with the COMPLEMENT()
@@ -390,7 +390,7 @@ SET	*set;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC void	truncate( set )
+ void	truncate( set )
 SET	*set;
 {
     /* Clears the set but also set's it back to the original, default size.
@@ -408,7 +408,7 @@ SET	*set;
     memset( set->defmap, 0, sizeof(set->defmap) );
 }
 
-PUBLIC int	next_member( set )
+ int	next_member( set )
 SET	*set;
 {
     /* set == NULL			Reset
@@ -445,7 +445,7 @@ SET	*set;
 
 /* ------------------------------------------------------------------- */
 
-PUBLIC void	pset( set, output_routine, param )
+ void	pset( set, output_routine, param )
 SET	*set;
 pset_t	output_routine;
 void	*param;

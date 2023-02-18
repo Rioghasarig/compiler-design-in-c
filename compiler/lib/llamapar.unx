@@ -63,8 +63,8 @@ typedef unsigned char   YY_TTYPE;
 #    define YYABORT return(1)	                                       	       
 #endif
 
-#ifndef YYPRIVATE
-#    define YYPRIVATE static	                                               
+#ifndef YY
+#    define YY static	                                               
 #endif
 
 #ifndef YYMAXERR
@@ -145,7 +145,7 @@ YY_TTYPE yy_next ( int cur_state, unsigned c );
 static int yyabort P((void)) { exit(1); BCC( return 0; ) }
 
 
-#define  yystk_cls YYPRIVATE
+#define  yystk_cls YY
 
 #define  yystk_err(o)  ((o) ? (yyerror("Stack overflow\n" ),yyabort())	: (yyerror("Stack underflow\n"),yyabort()) )
 
@@ -185,8 +185,8 @@ int   yynerrs    = 0;
 
 typedef char yyt_Yy_dstack; yystk_cls yyt_Yy_dstack Yy_dstack[YYMAXDEPTH]; yystk_cls yyt_Yy_dstack (*yyp_Yy_dstack) = Yy_dstack + (YYMAXDEPTH);
 
-ANSI( YYPRIVATE char *yy_sym( int sym )	)
-KnR ( YYPRIVATE char *yy_sym(     sym )	)
+ANSI( YY char *yy_sym( int sym )	)
+KnR ( YY char *yy_sym(     sym )	)
 KnR ( int sym;				)
 {
                                                                       
@@ -208,8 +208,8 @@ KnR ( int sym;				)
                     
    
 
-ANSI( YYPRIVATE  void yy_push(int x, YYSTYPE val) 	)
-KnR ( YYPRIVATE  void yy_push(    x,         val) 	)
+ANSI( YY  void yy_push(int x, YYSTYPE val) 	)
+KnR ( YY  void yy_push(    x,         val) 	)
 KnR ( int	   x;   )		                                        
 KnR ( YYSTYPE	   val;	)		                                        
 {
@@ -223,7 +223,7 @@ KnR ( YYSTYPE	   val;	)
     yy_pstack( 0, 1 );
 }
 
-YYPRIVATE int yy_pop P((void))
+YY int yy_pop P((void))
 {
     int prev_tos = ( ( (yyp_Yy_stack) >= (Yy_stack + sizeof(Yy_stack)/sizeof(*Yy_stack)) )? ((yyt_Yy_stack )(long)(yystk_err(0))) : ( *yyp_Yy_stack++ ));
     ++Yy_vsp;
@@ -234,8 +234,8 @@ YYPRIVATE int yy_pop P((void))
     return prev_tos;
 }
 
-ANSI( YYPRIVATE void yy_say_whats_happening(int tos_item, int production) )
-KnR ( YYPRIVATE void yy_say_whats_happening(    tos_item,     production) )
+ANSI( YY void yy_say_whats_happening(int tos_item, int production) )
+KnR ( YY void yy_say_whats_happening(    tos_item,     production) )
 KnR ( int tos_item;   	)                         		    
 KnR ( int production; 	)                                             
 {
@@ -398,8 +398,8 @@ KnR ( char  *fmt;			)
                    
    
 
-ANSI( YYPRIVATE yy_in_synch( int sym )	)
-KnR ( YYPRIVATE yy_in_synch( sym )	)
+ANSI( YY yy_in_synch( int sym )	)
+KnR ( YY yy_in_synch( sym )	)
 KnR ( int sym;				)
 {
                                                                              
@@ -412,8 +412,8 @@ KnR ( int sym;				)
     return 0;
 }
 
-ANSI( YYPRIVATE yy_synch( int lookahead )	)
-KnR ( YYPRIVATE yy_synch( lookahead 	)	)
+ANSI( YY yy_synch( int lookahead )	)
+KnR ( YY yy_synch( lookahead 	)	)
 KnR ( int sym;					)
 {
                                                                              

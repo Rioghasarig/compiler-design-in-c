@@ -9,7 +9,7 @@
 #pragma argsused
 #endif
 
-PUBLIC char *do_dollar( num, rhs_size, lineno, prod, field )
+ char *do_dollar( num, rhs_size, lineno, prod, field )
 int 	   num;						/* the N in $N */
 int 	   rhs_size;					/* not used    */
 int 	   lineno;					/* not used    */

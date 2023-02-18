@@ -6,7 +6,7 @@
 #include <tools/hash.h>
 #include "parser.h"
 
-PUBLIC char *do_dollar( num, rhs_size, lineno, prod, fname )
+ char *do_dollar( num, rhs_size, lineno, prod, fname )
 int	    num;	/* The N in $N, DOLLAR_DOLLAR for $$ (DOLLAR_DOLLAR)  */
 			/* is defined in parser.h, discussed in Chapter Four. */
 int	    rhs_size;	/* Number of symbols on right-hand side, 0 for tail   */

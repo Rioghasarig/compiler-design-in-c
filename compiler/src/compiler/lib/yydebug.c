@@ -53,10 +53,10 @@ extern	int	errno;
 /* Prototypes for local statics: */
 
 #if ( 0 UNIX(+1) )			/* UNIX compilers only */
-    PRIVATE	void    kbready ();
-    PRIVATE	WINDOW	*boxwin ();
+    	void    kbready ();
+    	WINDOW	*boxwin ();
 #else
-    PRIVATE	WINDOW	*boxwin (int lines, int cols, int y_start,
+    	WINDOW	*boxwin (int lines, int cols, int y_start,
 						 int x_start, char *title );
 #endif
 
@@ -98,10 +98,10 @@ extern	int	errno;
 
 #define	BRKLEN 33	/* Longest lexeme recognized in a breakpoint + 1. */
 
-PRIVATE int	P_breakpoint		= -1 ;
-PRIVATE int	L_breakpoint		= -1 ;
-PRIVATE char	S_breakpoint[ BRKLEN ]	= { '\0' } ;
-PRIVATE char	I_breakpoint[ BRKLEN ]	= { '\0' } ;
+ int	P_breakpoint		= -1 ;
+ int	L_breakpoint		= -1 ;
+ char	S_breakpoint[ BRKLEN ]	= { '\0' } ;
+ char	I_breakpoint[ BRKLEN ]	= { '\0' } ;
 
 /*----------------------------------------------------------------------
  * I've attempted to isolate these routines as much as possible from the actual
@@ -112,43 +112,43 @@ PRIVATE char	I_breakpoint[ BRKLEN ]	= { '\0' } ;
  * pointers.
  */
 
-PRIVATE int	Abort    ;	      /* Force input routine to return EOI.   */
-PRIVATE char	*Vstack  ;	      /* Base address of value stack (or NULL */
+ int	Abort    ;	      /* Force input routine to return EOI.   */
+ char	*Vstack  ;	      /* Base address of value stack (or NULL */
 				      /* if called by llama-generated parser).*/
-PRIVATE int	Vsize    ;	      /* Size of one element of value stack.  */
-PRIVATE char    **Dstack ;	      /* Base address of debug (symbol) stack.*/
-PRIVATE char	***P_dsp ; 	      /* Pointer to debug-stack pointer.      */
-PRIVATE int	*Sstack	 ; 	      /* Base address of state stack.         */
-PRIVATE int	**P_sp	 ; 	      /* Pointer to state-stack pointer.      */
-PRIVATE int	Depth    ;	      /* Stack depth (all three stacks).      */
+ int	Vsize    ;	      /* Size of one element of value stack.  */
+ char    **Dstack ;	      /* Base address of debug (symbol) stack.*/
+ char	***P_dsp ; 	      /* Pointer to debug-stack pointer.      */
+ int	*Sstack	 ; 	      /* Base address of state stack.         */
+ int	**P_sp	 ; 	      /* Pointer to state-stack pointer.      */
+ int	Depth    ;	      /* Stack depth (all three stacks).      */
 
 /*----------------------------------------------------------------------
  * The following variables are all used internally
  */
 
-PRIVATE WINDOW	*Stack_window   ;     /* Windows for the debugging screen     */
-PRIVATE WINDOW	*Prompt_window  ;
-PRIVATE WINDOW	*Code_window    ;
-PRIVATE WINDOW	*Comment_window ;
-PRIVATE WINDOW	*Token_window   ;
-PRIVATE int     Stacksize = DEFSTACK;/* Number of active lines in the stack   */
+ WINDOW	*Stack_window   ;     /* Windows for the debugging screen     */
+ WINDOW	*Prompt_window  ;
+ WINDOW	*Code_window    ;
+ WINDOW	*Comment_window ;
+ WINDOW	*Token_window   ;
+ int     Stacksize = DEFSTACK;/* Number of active lines in the stack   */
 				     /*      window (doesn't include border). */
-PRIVATE int  Onumele     = 0;        /* Number of elements on the stack.      */
-PRIVATE int  Interactive = 1;        /* Interactive mode (not n or N).        */
-PRIVATE int  Singlestep  = 1;        /* Single step through parse if true.    */
-PRIVATE long Delay       = 0L;       /* Amount of time to wait after printing */
+ int  Onumele     = 0;        /* Number of elements on the stack.      */
+ int  Interactive = 1;        /* Interactive mode (not n or N).        */
+ int  Singlestep  = 1;        /* Single step through parse if true.    */
+ long Delay       = 0L;       /* Amount of time to wait after printing */
 				     /* each stack update when not single     */
 				     /* stepping (milliseconds).              */
-PRIVATE int  Inp_fm_file  = 0;    /* 1 if input file is open.		      */
-PRIVATE FILE *Log         = NULL; /* Pointer to the log file if one is open.  */
-PRIVATE int  No_comment_pix = 0;  /* 1 if no comment-window output is printed.*/
-PRIVATE int  No_stack_pix   = 0;  /* 1 if no stack pictures are to be printed */
+ int  Inp_fm_file  = 0;    /* 1 if input file is open.		      */
+ FILE *Log         = NULL; /* Pointer to the log file if one is open.  */
+ int  No_comment_pix = 0;  /* 1 if no comment-window output is printed.*/
+ int  No_stack_pix   = 0;  /* 1 if no stack pictures are to be printed */
 				  /* 			      in the log file.*/
-PRIVATE int Horiz_stack_pix = 0;  /* 1 if stack pictures are printed horiz-   */
+ int Horiz_stack_pix = 0;  /* 1 if stack pictures are printed horiz-   */
 				  /* 		     ontally in the log file. */
-PRIVATE int Parse_pix;		  /* if(Horiz_stack_pix), print state stack.  */
-PRIVATE int Sym_pix;		  /* if(Horiz_stack_pix), print symbol stack. */
-PRIVATE int Attr_pix;		  /* if(Horiz_stack_pix), print attrib. stack.*/
+ int Parse_pix;		  /* if(Horiz_stack_pix), print state stack.  */
+ int Sym_pix;		  /* if(Horiz_stack_pix), print symbol stack. */
+ int Attr_pix;		  /* if(Horiz_stack_pix), print attrib. stack.*/
 
 #if (0 UNIX(+1) )  /*--------------- UNIX SYSTEM V ONLY --------------------*/
 					/* Since MS-DOS has a system call that
@@ -159,7 +159,7 @@ PRIVATE int Attr_pix;		  /* if(Horiz_stack_pix), print attrib. stack.*/
 					 * flag (Char_avail). kbready() is the
 					 * SIGIO exception handler.
 					 */
-PRIVATE int	Char_avail = 0;
+ int	Char_avail = 0;
 #define kbhit()	Char_avail
 
 #else   /*-------------------- MSDOS VERSION ONLY -------------------------*/
@@ -178,20 +178,20 @@ extern int    kbhit ( void );		/* Microsoft function. returns 1 if a */
  * side-effects if rewritten as a macro.
  */
 
-PRIVATE unsigned char Map[] =
+ unsigned char Map[] =
 {
     '|', '+', '+', '+', '+', '+', '+', '|', '+', '+', '+', '+', '+', '+',
     '+', '+', '+', '-', '+', '+', '+', '+', '+', '+', '+', '+', '=', '+',
     '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'
 };
 
-PRIVATE	int  conv(c)
+	int  conv(c)
 int c;
 {
     return (VERT <= c && c <= UL) ?  Map[c - VERT] : c ;
 }
 #endif  /*--------------------------------------------------------------*/
-PUBLIC	int yy_init_debug(sstack, p_sp, dstack, p_dsp, vstack, v_ele_size, depth)
+	int yy_init_debug(sstack, p_sp, dstack, p_dsp, vstack, v_ele_size, depth)
 
 int	*sstack;	/* Base address of state stack.  		  */
 int	**p_sp;		/* Address of state-stack pointer.		  */
@@ -268,20 +268,20 @@ int	depth;		/* Number of elements in all three stacks.	  */
  */
 
 #if ( 0 UNIX(+1) )		/* UNIX compilers only */
-PRIVATE	void    kbready( )  /* Called when new character is available. */
+	void    kbready( )  /* Called when new character is available. */
 {
     Char_avail = 1;
 }
 #endif
 
-PRIVATE	void die_a_horrible_death()		   /* Come here on a SIGINT */
+	void die_a_horrible_death()		   /* Come here on a SIGINT */
 {						   /* or 'q' command.       */
     signal( SIGINT, SIG_IGN );
     yy_quit_debug();
     exit( 0 );
 }
 
-PUBLIC	void yy_quit_debug()			      /* Normal termination. */
+	void yy_quit_debug()			      /* Normal termination. */
 {
     echo();				   /* Turn echo and editing back on. */
     nocrmode();
@@ -298,7 +298,7 @@ PUBLIC	void yy_quit_debug()			      /* Normal termination. */
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	WINDOW	*boxwin( lines, cols, y_start, x_start, title )
+	WINDOW	*boxwin( lines, cols, y_start, x_start, title )
 int	lines;
 int	cols;
 int	y_start;
@@ -331,7 +331,7 @@ char	*title;
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC  int	yy_get_args( argc, argv )
+  int	yy_get_args( argc, argv )
 int	argc;
 char	**argv;
 {
@@ -399,8 +399,8 @@ char	**argv;
     return newargv - oldargv;
 }
 
-ANSI( PRIVATE int prnt_putc(int c, WINDOW *win)  )
-KnR ( PRIVATE int prnt_putc(    c,         win)  )
+ANSI(  int prnt_putc(int c, WINDOW *win)  )
+KnR (  int prnt_putc(    c,         win)  )
 KnR ( int c;					 )
 KnR ( WINDOW *win;				 )
 {
@@ -439,7 +439,7 @@ KnR ( WINDOW *win;				 )
 
 #else	/* UNIX */
 
-    PRIVATE	void refresh_win( win )
+    	void refresh_win( win )
     WINDOW	*win;
     {
         /* Refresh the windows if you're not in go mode. (If you are, nothing
@@ -453,7 +453,7 @@ KnR ( WINDOW *win;				 )
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-PUBLIC	void yy_output( where, fmt, args )		/* Generate code */
+	void yy_output( where, fmt, args )		/* Generate code */
 int	where;
 char	*fmt;
 va_list	args;
@@ -510,8 +510,8 @@ va_list	args;
 }
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-ANSI( PUBLIC void yycomment( char *fmt, ...  )	)
-KnR ( PUBLIC      yycomment(       fmt	     )	)
+ANSI(  void yycomment( char *fmt, ...  )	)
+KnR (       yycomment(       fmt	     )	)
 KnR ( char *fmt;				)
 {
     /* Works like printf() except that it automatically prints a newline
@@ -533,8 +533,8 @@ KnR ( char *fmt;				)
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-ANSI( PUBLIC void yyerror( char *fmt, ...  )	)
-KnR ( PUBLIC      yyerror(       fmt	   )	)
+ANSI(  void yyerror( char *fmt, ...  )	)
+KnR (       yyerror(       fmt	   )	)
 KnR ( char *fmt;				)
 {
     /* Debugging version of the error routine. Works just like the nondebugging
@@ -566,8 +566,8 @@ KnR ( char *fmt;				)
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-ANSI( PUBLIC void yy_input( char *fmt, ...  )	)
-KnR ( PUBLIC      yy_input(       fmt	     )	)
+ANSI(  void yy_input( char *fmt, ...  )	)
+KnR (       yy_input(       fmt	     )	)
 KnR ( char *fmt;				)
 {
     /* This is not an input function; rather, it writes to the INPUT window.
@@ -583,7 +583,7 @@ KnR ( char *fmt;				)
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	void display_file( name, buf_size, print_lines )
+	void display_file( name, buf_size, print_lines )
 char	*name;			   /* Initially holds the file name, but */
 int     buf_size;		   /*       recycled as an input buffer. */
 int	print_lines;
@@ -632,7 +632,7 @@ int	print_lines;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	void write_screen( filename )
+	void write_screen( filename )
 char	*filename;
 {
     /* Print the current screen contents to the indicated file. Note that the
@@ -690,7 +690,7 @@ char	*filename;
     fclose( file );
     wmove( Prompt_window, y, x );
 }
-PUBLIC	void yy_pstack( do_refresh, print_it )
+	void yy_pstack( do_refresh, print_it )
 
 int	do_refresh;		/* redraw entire window rather than update  */
 int	print_it;		/* if true, print the stack to the log file */
@@ -908,7 +908,7 @@ int	print_it;		/* if true, print the stack to the log file */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void yy_redraw_stack()
+	void yy_redraw_stack()
 {
     /* Redraw the entire stack screen by writing out the top Stacksize elements
      * of the stack in the stack window. Note that scrolling is turned off so
@@ -937,7 +937,7 @@ PUBLIC	void yy_redraw_stack()
 
     scrollok( Stack_window, TRUE );
 }
-PRIVATE	void delay()
+	void delay()
 {
     /* Print a prompt and wait for either a carriage return or another command.
      * Note that the time returned by time() is the elapsed time, in seconds,
@@ -1111,7 +1111,7 @@ outside:
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE void cmd_list()
+ void cmd_list()
 {
     /* Print a list of commands in the stack window & prompt for an action. */
 
@@ -1139,7 +1139,7 @@ PRIVATE void cmd_list()
     wprintw  (Stack_window, "Space or Enter to single step" );
     wrefresh (Stack_window );
 }
-PUBLIC	int yy_nextoken()
+	int yy_nextoken()
 {
     /* Input a token from yylex() and echo to both the token and comment
      * windows. Yy_comment() writes to the log file too. Break if the input
@@ -1199,7 +1199,7 @@ PUBLIC	int yy_nextoken()
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC	void yy_break( production_number )
+	void yy_break( production_number )
 int  production_number;
 {
     /*  Handles production-number breakpoints. If a break is required, start
@@ -1219,7 +1219,7 @@ int  production_number;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE int breakpoint()
+ int breakpoint()
 {
     /* Set up a breakpoint by prompting the user for any required information.
      * Return true if we have to redraw the stack window because a help screen
@@ -1323,7 +1323,7 @@ PRIVATE int breakpoint()
 
     return rval;
 }
-PRIVATE	int	new_input_file( buf )
+	int	new_input_file( buf )
 char	*buf;
 {
     /* Open up a new input file. Input must come from a file because the
@@ -1348,7 +1348,7 @@ char	*buf;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE  FILE	*to_log( buf )
+  FILE	*to_log( buf )
 char	*buf;
 {
     /* Set up everything to log output to a file (open the log file, etc.). */
@@ -1400,7 +1400,7 @@ char	*buf;
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	int  input_char( ANSI(void) )	  /* void argument illegal under UNIX */
+	int  input_char( ANSI(void) )	  /* void argument illegal under UNIX */
 {
     /* Get a character from the input window and echo it explicitly. If we've
      * compiled under Unix, reset the character-available flag.
@@ -1417,7 +1417,7 @@ PRIVATE	int  input_char( ANSI(void) )	  /* void argument illegal under UNIX */
 
 /*----------------------------------------------------------------------*/
 
-PUBLIC int yyprompt( prompt, buf, getstring )
+ int yyprompt( prompt, buf, getstring )
 char *prompt, *buf;
 int  getstring;	   /* get entire string (as compared to a single character */
 {
@@ -1476,7 +1476,7 @@ int  getstring;	   /* get entire string (as compared to a single character */
 
 /*----------------------------------------------------------------------*/
 
-PRIVATE	void presskey()
+	void presskey()
 {
     /* Ask for a key to be pressed and wait for it.  Note that this command
      * does a refresh, but it intentionally does not clear the window before
