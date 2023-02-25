@@ -48,7 +48,7 @@ char	*mode;		/* "w" or "a" */
     fd_src = open(src, O_RDONLY | O_BINARY );
     fd_dst = open(dst, O_WRONLY | O_BINARY | O_CREAT |
 					 (*mode=='w' ? O_TRUNC : O_APPEND),
-					 S_IREAD|S_IWRITE);
+					 S_IRUSR|S_IWUSR);
 
     if     ( fd_src == -1 ){ ret_val = ERR_SRC_OPEN; }
     else if( fd_dst == -1 ){ ret_val = ERR_DST_OPEN; }

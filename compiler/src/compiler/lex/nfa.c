@@ -82,7 +82,7 @@ typedef enum WARN_NUM
 };
 
 
- NFA   *Nfa_states  ; 	     /* State-machine array		   */
+ NFA   *Nfa_states_ptr  ; 	     /* State-machine array		   */
  int   Nstates = 0  ;  	     /* # of NFA states in machine	   */
  int   Next_alloc;  	     /* Index of next element of the array */
 
@@ -240,7 +240,7 @@ char *msgtype;
 
     if( first_time )
     {
-	if( !( Nfa_states = (NFA *) calloc(NFA_MAX, sizeof(NFA)) ))
+	if( !( Nfa_states_ptr = (NFA *) calloc(NFA_MAX, sizeof(NFA)) ))
 	    parse_err( E_MEM );	/* doesn't return */
 
 	first_time = 0;
@@ -252,7 +252,7 @@ char *msgtype;
 
     /* If the stack is not ok, it's empty */
 
-    p = !STACK_OK() ? &Nfa_states[Next_alloc++] : POP();
+    p = !STACK_OK() ? &Nfa_states_ptr[Next_alloc++] : POP();
     p->edge = EPSILON;
     return p;
 }
@@ -931,14 +931,14 @@ NFA	**start_state;
     *max_state   = Next_alloc ;	/* Max state # in NFA   */
 
     if( Verbose > 1 )
-	print_nfa( Nfa_states, *max_state, *start_state );
+	print_nfa( Nfa_states_ptr, *max_state, *start_state );
 
     if( Verbose )
     {
 	printf("%d/%d NFA states used.\n", *max_state, NFA_MAX );
 	printf("%s/%d bytes used for accept strings.\n\n", save(NULL), STR_MAX);
     }
-    return Nfa_states;
+    return Nfa_states_ptr;
 }
 
 

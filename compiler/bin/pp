@@ -1,7 +1,6 @@
+#!/bin/bash
 
-#
-# This C-shell script simulates the ANSI C Preprocessor by using sed to do
-# token pasting. Usage syntax is:
+# This bash script simulates the ANSI C Preprocessor by using sed to do token pasting. Usage syntax is:
 #
 #	pp input_file [cc-flags]
 #
@@ -10,8 +9,11 @@
 # The third sed invokation takes care of a bug in cpp, which doesn't generate
 # proper #line directives. The output file from this script can be submitted
 # to cc without difficulty.
-#
-set fname=$1:t
-echo making $fname:r.pp.c
+
+# Get the filename without path or extension
+fname=$(basename "$1" | cut -d '.' -f 1)
+
+echo making "$fname".pp.c
 cc -E $2 $1 | sed 's/## //g' | sed 's/##//g' \
-	    | sed 's/^# \([0-9]\)/#line \1/' > $fname:r.pp.c
+       | sed 's/^# \([0-9]\)/#line \1/' > "$fname".pp.c
+       

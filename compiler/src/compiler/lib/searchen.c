@@ -6,6 +6,7 @@
 #include <string.h>
 #include <tools/debug.h>
 #include <tools/compiler.h>
+/*#include <unistd.h>*/
 
 #if( 0 BCC(+1) )		/* Borland C/C++	*/
 #include <dir.h>		/* getcwd() prototype   */
@@ -18,7 +19,7 @@
 #define PBUF_SIZE 129  		/* Maximum length of a path name + 1 */
 
 #if (0 UNIX(+1))
-    define unixfy(x)	/* empty */
+    #define unixfy(x)	/* empty */
 #else
     static void unixfy( char *str )		/* convert name to lower case */
     {						/* and convert \'s to /'s     */
@@ -72,9 +73,9 @@ char	*pathname;	/* Place to put full path name when found	*/
 	do
 	{
 	    MS( if( !p[1] || p[1] != ':' )		       		   )
-            MS(	    sprintf( pathname,"%c:%0.90s/%0.20s",disk,p,filename); )
+            MS(	    sprintf( pathname,"%c:%.90s/%.20s",disk,p,filename); )
 	    MS( else							   )
-	            sprintf( pathname, "%0.90s/%0.20s", p, filename );
+	            sprintf( pathname, "%.90s/%.20s", p, filename );
 
 	    if( access( pathname, 0 ) >= 0 )
 	    {

@@ -17,7 +17,8 @@ void driver		P(( void ));
 
 /*----------------------------------------------------------------------*/
 
- FILE	*Driver_file = stderr ;
+ /*FILE	*Driver_file = stderr ; */
+ FILE *Driver_file; 
 
 /*----------------------------------------------------------------------
  * Routines in this file are occs specific. There's a different version of all

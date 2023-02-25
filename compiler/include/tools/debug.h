@@ -59,9 +59,9 @@
 #	define MSC6(x)
 #       define MSC7(x)
 #	define UNIX(x) x
-#	define ANSI(x)
+#	define ANSI(x) x
 #	define FARPTR *
-#	define VA_LIST
+#	define VA_LIST ,...
 
 #	define O_BINARY 0	/* No binary input mode in UNIX open().     */
 #	define far		/* Microsoft/Turbo keyword for an 8086      */

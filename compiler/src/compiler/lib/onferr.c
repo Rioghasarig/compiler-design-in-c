@@ -10,6 +10,7 @@
  */
 int	on_ferr()
 {
-    UNIX( extern int errno; )
-    return errno;
+    /*UNIX( extern int errno; )
+    return errno;*/
+    return 1; 
 }

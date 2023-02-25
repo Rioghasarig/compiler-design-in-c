@@ -19,7 +19,7 @@
    #pragma comment(exestr,"(C)" __DATE__ "Allen I. Holub. All rights reserved.")
 #endif
 /*----------------------------------------------------------------------*/
-  void cmd_line_error P(( int usage, char *fmt, ...	));
+  void cmd_line_error ( int usage, char *fmt, ...	);
   void do_file	     P(( void 				));
   void head	     P(( int suppress_output 		));
   void tail	     P(( void 				));
@@ -43,9 +43,7 @@ extern int	Lineno;		     	/* In globals.h, the line number   */
 				     	/* used to print #line directives. */
 /*----------------------------------------------------------------------*/
 ANSI(		void	cmd_line_error( int usage, char *fmt, ... )	)
-KnR (		void	cmd_line_error(     usage,       fmt      )	)
-KnR (	int	usage;							)
-KnR (	char	*fmt;							)
+KnR (		void	cmd_line_error( int usage, char *fmt, ... )	)
 {
     /* Print an error message and exit to the operating system. This routine is
      * used much like printf(), except that it has an extra first argument.
@@ -64,7 +62,7 @@ KnR (	char	*fmt;							)
 
     va_start(args, fmt);
     fprintf ( stderr, "LeX: "	);
-    vfprintf( stderr, fmt, args	);
+    /*vfprintf( stderr, fmt, args	);*/
 
     if( !usage )
 	perror("");
@@ -87,9 +85,7 @@ KnR (	char	*fmt;							)
 }
 /*----------------------------------------------------------------------*/
 ANSI(	  void	lerror( int status, char *fmt, ... )	)
-KnR (	  void	lerror(     status,       fmt      )	)
-KnR (	int	status;						)
-KnR (	char	*fmt;						)
+KnR (	  void	lerror( int status, char *fmt, ... )	)
 {
     /* Print an error message and input line number. Exit with
      * indicated status if "status" is nonzero.
@@ -99,7 +95,7 @@ KnR (	char	*fmt;						)
 
     va_start(args, fmt);
     fprintf  ( stderr, "lex, input line %d: ", Actual_lineno );
-    vfprintf ( stderr, fmt, args );
+    /*vfprintf ( stderr, fmt, args ); */ 
     if( status )
 	exit( status );
     va_end(args);
@@ -191,7 +187,7 @@ char	**argv;
     {
 	printf("%d out of %d DFA states in minimized machine\n", nstates,
 								    DFA_MAX );
-	printf("%d bytes required for minimized tables\n\n",
+	printf("%ld bytes required for minimized tables\n\n",
 		 nstates * MAX_CHARS * sizeof(TTYPE)		/* dtran  */
 	       + nstates *             sizeof(TTYPE) );		/* accept */
     }
@@ -223,7 +219,7 @@ char	**argv;
 	    cnext      ( Ofile, DTRAN_NAME				);
 
 	    if( Verbose )
-		printf("%d bytes required for column-compressed tables\n\n",
+		printf("%ld bytes required for column-compressed tables\n\n",
 		      i 				     /* dtran      */
 		      + (nstates * sizeof(int)) ); 	     /* Yy_accept  */
 	}

@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#Compiled Files
+compiler/src/compiler/parser/acts.pp.c
+compiler/src/compiler/lex/LeX
+compiler/src/compiler/parser/lexyy.c
+compiler/src/compiler/lex/lexyy.c

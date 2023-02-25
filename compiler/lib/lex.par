@@ -61,7 +61,7 @@ unsigned char	*ii_text();
 char   *yytext;		/* Pointer to lexeme.           */
 int    	yyleng;		/* Length of lexeme.            */
 int    	yylineno;	/* Input line number.           */
-FILE	*yyout = stdout;
+FILE	*yyout;
 
 /*-----------------------------------------------------------------
  * Macros that duplicate functions in UNIX lex:

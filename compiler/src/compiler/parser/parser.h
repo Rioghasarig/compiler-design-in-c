@@ -207,7 +207,7 @@ CLASS int  Make_parser      I( = 1	   ); /* ==0 if -a on command line    */
 CLASS int  Make_yyoutab     I( = 0	   ); /* ==1 if -T on command line    */
 CLASS int  No_lines	    I( = 0	   ); /* Suppress #lines in output    */
 CLASS int  No_warnings	    I( = 0	   ); /* Suppress warnings if true    */
-CLASS FILE *Output          I( = stdout	   ); /* Output stream.		      */
+CLASS FILE *Output          ;  /*I( = stdout	   );*/ /* Output stream.		      */
 CLASS int  Public	    I( = 0         ); /* Make static symbols public   */
 CLASS int  Symbols	    I( = 0	   ); /* Generate symbol table.	      */
 CLASS int  Threshold 	    I( = 4	   ); /* Compression threshold	      */
@@ -270,24 +270,24 @@ CLASS int      Num_productions I( = 0          ); /* Number of productions    */
   void	code_header	P(( void ));				/* lldriver.c */
   char  *do_dollar  	P(( int num, int rhs_size, int lineno,\
   			       PRODUCTION *prod, char *fname));	/* main.c     */
-  void  document	P(( char *fmt, ... ));			/* main.c     */
+  void  document	( char *fmt, ... );			/* main.c     */
   void  document_to	P(( FILE *fp ));			/* main.c     */
   void	driver		P(( void ));				/* lldriver.c */
   void	driver		P(( void ));				/* yydriver.c */
-  void	error	  	P(( int fatal, char *fmt, ... ));	/* main.c     */
+  void	error	  	( int fatal, char *fmt, ... );	/* main.c     */
   void	file_header	P(( void ));				/* yydriver.c */
   void	file_header	P(( void ));				/* lldriver   */
   void	first		P(( void ));				/* first.c    */
   int	first_rhs	P(( SET *dest, SYMBOL **rhs, int len ));/* first.c    */
   void	follow		P(( void ));				/* follow.c   */
-  void	lerror	  	P(( int fatal, char *fmt, ... ));	/* main.c     */
+  void	lerror	  	( int fatal, char *fmt, ... );	/* main.c     */
   int	lr_conflicts	P(( FILE *fp ));			/* yystate.c  */
   void	lr_stats	P(( FILE *fp ));			/* yystate.c  */
   void	make_parse_tables P(( void ));				/* yystate.c  */
   void	make_token_file P(( void ));				/* stok.c     */
   void	make_yy_stok    P(( void ));				/* stok.c     */
   char  *	open_errmsg	P(( void ));			/* main.c     */
-  void	output		P(( char *fmt, ... ));			/* main.c     */
+  void	output		( char *fmt, ... );			/* main.c     */
   void	patch		P(( void ));				/* yypatch.c */
   void	select		P(( void ));				/* llselect   */
   void	signon		P(( void ));				/* signon.c   */

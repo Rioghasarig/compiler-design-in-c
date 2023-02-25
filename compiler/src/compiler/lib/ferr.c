@@ -11,8 +11,7 @@
  */
 
 ANSI( int  ferr( char *fmt, ... )	)
-KnR ( int  ferr( fmt            )	)
-KnR ( char *fmt;			)
+KnR ( int  ferr( char *fmt, ... )	)
 {
   D(	void		(**ret_addr_p)(); )
 	va_list	  	args;

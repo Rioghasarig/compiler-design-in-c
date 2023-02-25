@@ -6,8 +6,7 @@
 
 #include <stdarg.h>
 
-int 	_sprintf( buf, fmt  VA_LIST )
-char	*buf, *fmt;
+int 	_sprintf(char *buf, char *fmt, ... )
 {
     va_list   args;
     va_start( args,   fmt );

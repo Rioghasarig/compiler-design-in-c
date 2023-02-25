@@ -94,7 +94,7 @@ extern  int concat P((int size,char *dst,...));
 
 /* ==================== \src\tools\ferr.c ==================== */
 
-extern  int ferr P((char *fmt,...));
+extern  int ferr (char *fmt,...);
 
 /* ==================== \src\tools\onferr.c ==================== */
 

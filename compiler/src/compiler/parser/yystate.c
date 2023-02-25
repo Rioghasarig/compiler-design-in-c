@@ -147,7 +147,7 @@ void	movedot		  P(( ITEM *item				     ));
 int	move_eps	  P(( STATE *cur_state, ITEM **closure_items, \
 						int nclose		     ));
 MS  ( void *new )
-UNIX( ACT  *new )  	  P(( void 					     ));
+UNIX( void  *new )  	  P(( void 					     ));
 ITEM	*newitem	  P(( PRODUCTION *production			     ));
 int	newstate	  P(( ITEM **items, int nitems, STATE **statep	     ));
 ACT	*p_action	  P(( int state, int input_sym			     ));
@@ -1259,9 +1259,9 @@ FILE	*fp;
     fprintf(fp, "%4ld/%-4d unfinished items\n", (long)(Next_allocate - Heap),
 							    MAX_UNFINISHED);
     fprintf(fp, "%4d      bytes required for LALR(1) transition matrix\n",
-			      (2 * sizeof(char*) * Nstates) /* index arrays */
+			      (int)((2 * sizeof(char*) * Nstates) /* index arrays */
 			      + Nstates			    /* count fields */
-			      + (Npairs * sizeof(short))    /* pairs        */
+			      + (Npairs * sizeof(short)) )    /* pairs        */
 	   );
     fprintf(fp, "\n");
 }

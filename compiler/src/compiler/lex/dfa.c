@@ -103,7 +103,7 @@ ACCEPT	*(  *acceptp );
 	printf("\n%d out of %d DFA states in initial machine.\n",
 							  Nstates, DFA_MAX);
 
-	printf("%d bytes required for uncompressed tables.\n\n",
+	printf("%ld bytes required for uncompressed tables.\n\n",
 	      Nstates * MAX_CHARS * sizeof(TTYPE)	 	/* dtran  */
 	    + Nstates             * sizeof(TTYPE) );	 	/* accept */
 
@@ -174,7 +174,7 @@ SET	*NFA_set;
 	    if( Verbose > 1 )
 	    {
 		fputs("----------------\n", stdout );
-		printf("working on DFA state %d = NFA states: ",
+		printf("working on DFA state %ld = NFA states: ",
 							Last_marked-Dstates);
 #if (0 ANSI(+1))
 		pset( Last_marked->set, (int (*)(void*,char*,int)) fprintf,

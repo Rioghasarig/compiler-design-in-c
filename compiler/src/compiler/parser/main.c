@@ -49,9 +49,9 @@ void symbols	  P(( void			));
 void statistics	  P(( FILE *fp			));
 void tail	  P(( void			));
 
-void output	  P(( char *fmt, ...		));		/* public */
-void lerror	  P(( int fatal, char *fmt, ...	));
-void error	  P(( int fatal, char *fmt, ...	));
+void output	  (char*  fmt, ...		);		/* public */
+void lerror	  ( int fatal, char *fmt, ...	);
+void error	  ( int fatal, char *fmt, ...	);
 char *open_errmsg P(( void 			));
 char *do_dollar	  P(( int num, int rhs_size, int lineno, PRODUCTION *prod, \
 								char *fname));
@@ -114,7 +114,8 @@ char	**argv;
 	OX( Output_fname = !Make_parser ? ACT_FILE : PARSE_FILE ; )
 	LL( Output_fname = PARSE_FILE; 				  )
 
-	if( (Output = fopen( Output_fname, "w")) == NULL )
+	Output = fopen(Output_fname, "w"); 
+	if( Output == (FILE*)NULL )
 	    error( FATAL, "Can't open output file %s: %s\n",
 						Output_fname, open_errmsg() );
     }
@@ -275,7 +276,7 @@ out: ;
     {
 	if( ii_newfile( Input_file_name = *argv ) < 0 )
 	{
-	    sprintf( name_buf, "%0.70s.%s", *argv, DEF_EXT );
+	    sprintf( name_buf, "%.70s.%s", *argv, DEF_EXT );
 
 	    if( ii_newfile( Input_file_name = name_buf ) < 0 )
 		error( FATAL, "Can't open input file %s or %s: %s\n",
@@ -338,7 +339,7 @@ out: ;
     {
 	time  = (  end_time.time * 1000) +   end_time.millitm ;
 	time -= (start_time.time * 1000) + start_time.millitm ;
-	printf( "time required to make tables: %ld.%-03ld seconds\n",
+	printf( "time required to make tables: %ld.%03ld seconds\n",
 						(time/1000), (time%1000));
     }
 
@@ -389,8 +390,7 @@ OX(	 lr_stats(fp );				      	      		      )
 }
 /*----------------------------------------------------------------------*/
 ANSI( 	void output( char *fmt, ... )	)
-KnR ( 	void output(       fmt      )	)
-KnR ( char	*fmt;				)
+KnR ( 	void output( char *fmt, ... )	)
 {
     /* Works like printf(), but writes to the output file. See also: the
      * outc() macro in parser.h
@@ -402,8 +402,7 @@ KnR ( char	*fmt;				)
 }
 /*----------------------------------------------------------------------*/
 ANSI( 	void document( char *fmt, ... )	)
-KnR ( 	void document( fmt )		)
-KnR ( char	*fmt;				)
+KnR ( 	void document( char *fmt, ... )		)
 {
     /* Works like printf() but writes to yyout.doc (provided that the file
      * is being created.
@@ -438,9 +437,7 @@ KnR ( FILE *fp;				)
 }
 /*----------------------------------------------------------------------*/
 ANSI( 	void lerror(int fatal, char *fmt, ... )	)
-KnR ( 	void lerror(    fatal,       fmt      )	)
-KnR ( int	fatal;					)
-KnR ( char	*fmt;					)
+KnR ( 	void lerror(int fatal, char *fmt, ... )	)
 {
     /* This error-processing routine automatically generates a line number for
      * the error. If "fatal" is true, exit() is called.
@@ -483,9 +480,7 @@ KnR ( char	*fmt;					)
 }
 
 ANSI( 	void error(int fatal, char *fmt, ... )	)
-KnR ( 	void error(    fatal,       fmt      )	)
-KnR ( int	fatal;					)
-KnR ( char	*fmt;					)
+KnR ( 	void error(int fatal, char *fmt, ... )	)
 {
     /* This error routine works like lerror() except that no line number is
      * generated. The global error count is still modified, however.

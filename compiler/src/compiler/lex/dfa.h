@@ -52,7 +52,7 @@ void signon	 P(( void				  )); /* signon.c   */
 void pheader P(( FILE *fp,    ROW dtran[], int nrows, ACCEPT *accept));
 void pdriver P(( FILE *output,             int nrows, ACCEPT *accept));
 
-extern  void lerror  	    P((int status,char *fmt,... ));	/* lex.c   */
+extern  void lerror  	    (int status,char *fmt,... );	/* lex.c   */
 extern  void main	    P((int argc,char **argv	));	/* lex.c   */
 extern  char *get_expr	    P(( void 			));	/* input.c */
 

@@ -7,7 +7,6 @@
 #pragma loop_opt(off)  /* Can't do loop optimizations (alias problems) */
 #endif
 
-UNIX( int concat( size, dst  		   ) )
 ANSI( int concat( int size, char *dst, ... ) )
 {
     /* This subroutine concatenates an arbitrary number of strings into a single

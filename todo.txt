@@ -1,0 +1,3 @@
+Compile the lexer for the occs parser:
+    Find origin of the line "FILE* yyout = stdout" in the output of LeX applied to parser.lex
+Make occs compile without termlib or curses library

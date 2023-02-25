@@ -3,3 +3,15 @@ Removed stdarg.h and stdlib.h from include directory
 Removed typedefs in UNIX case of debug.h preprocessing commands
 Removed line aliasing at top of debug.h
 Removed "PRIVATE" and "PUBLIC" specifiers from all files
+Changed non-constant initializations of FILE pointers to Unintialized pointers
+    - yydriver.c - Drive_file
+    - parser.h - Output
+Changed the pp script from a Windows batchs script to a Linux bash script
+Changed macros in debug.h to compile with UNIX and ANSI macros on
+Changed functions using a variable number of arguments to use ANSI conventions even in 
+KnR mode. 
+
+-- REMINDERS
+Omitted the error print in cmd_line_error
+Removed stdout initialization of yyout in lex.pr
+Removed the error output in on_ferr (onferr.c)
