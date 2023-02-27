@@ -8,6 +8,7 @@
 #include <tools/debug.h>
 #include <tools/l.h>
 
+
 /*------------------------------------------------------------------------
  * INPUT.C:   The input system used by LeX-generated lexical analyzers.
  *------------------------------------------------------------------------
@@ -56,9 +57,9 @@ typedef unsigned char	uchar;
 
 /* Pointers to open, close, and read functions */
 
-	int (*Openp) P((char*, int)) = (int(*)P((char*, int))) open;
-	int (*Closep) P((int)      ) =close;
-	int (*Readp)  P((int, void*, unsigned)) =read ;
+	int (*Openp) P((char*, int)) = (int(*)P((char*, int))) fopen;
+	int (*Closep) P((int)      ) =fclose;
+	int (*Readp)  P((int, void*, unsigned)) =fread ;
 void	ii_io( open_funct, close_funct, read_funct )
 int  (*open_funct)  P(( char* name, int mode ));
 int  (*close_funct) P(( int handle ));

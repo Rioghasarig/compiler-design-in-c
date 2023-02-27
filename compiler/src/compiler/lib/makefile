@@ -35,12 +35,12 @@ all:	$(LTARG) $(CTARG)
 
 $(CTARG):	$(COMP_OBJ)
 	rm -f $(CTARG)
-	ar rv $(CTARG) $(COMP_OBJ)
+	ar -rv $(CTARG) $(COMP_OBJ)
 	ranlib $(CTARG)
 
 $(LTARG):	$(L_OBJ)
-	rm $(LTARG)
-	ar rv $(LTARG) $(L_OBJ)
+	rm -f $(LTARG)
+	ar -rv $(LTARG) $(L_OBJ)
 	ranlib $(LTARG)
 
 #----------------------------------------------------------------------

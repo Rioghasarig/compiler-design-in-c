@@ -210,7 +210,7 @@ int	depth;		/* Number of elements in all three stacks.	  */
     UNIX( int flags;					   )
     UNIX( signal( SIGIO, kbready );			   )
     UNIX( flags = fcntl( fileno(stdin), F_GETFL, 0 );	   )
-    UNIX( fcntl( fileno(stdin), F_SETFL, flags | FASYNC ); )
+    UNIX( fcntl( fileno(stdin), F_SETFL, flags | O_ASYNC ); )
 
     Sstack = sstack;
     Dstack = dstack;

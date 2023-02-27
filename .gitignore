@@ -56,3 +56,4 @@ compiler/src/compiler/parser/acts.pp.c
 compiler/src/compiler/lex/LeX
 compiler/src/compiler/parser/lexyy.c
 compiler/src/compiler/lex/lexyy.c
+compiler/src/compiler/parser/llama

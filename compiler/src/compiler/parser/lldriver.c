@@ -12,7 +12,7 @@ extern  void file_header	P(( void ));			/* public */
 extern  void code_header	P(( void ));
 extern  void driver		P(( void ));
 /*----------------------------------------------------------------------*/
- FILE	*Driver_file = stderr ;
+ FILE	*Driver_file;
 
 /*----------------------------------------------------------------------
  * Routines in this file are llama specific. There's a different version

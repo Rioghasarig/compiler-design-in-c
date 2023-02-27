@@ -72,8 +72,6 @@
 #	define memcpy(d,s,n)  bcopy(s,d,n)
 	extern long getpid();
 #	define raise(sig) kill( (int)getpid(), sig )
-#	define vfprintf(stream, fmt, argp) _doprnt( fmt, argp, stream )
-#	define vprintf (	fmt, argp) _doprnt( fmt, argp, stdout )
 #endif /*  MSDOS   */
 #endif /*__TURBOC__*/
 

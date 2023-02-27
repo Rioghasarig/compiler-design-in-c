@@ -242,7 +242,7 @@ SYMBOL	*lhs;
 	defnext    ( Output, DTRAN );
 
 	if( Verbose )
-	    printf("%d bytes required for tables\n", i * sizeof(YY_TTYPE) );
+	    printf("%ld bytes required for tables\n", i * sizeof(YY_TTYPE) );
     }
     else
     {
@@ -250,7 +250,7 @@ SYMBOL	*lhs;
 	    pnext( Output, DTRAN );
 
 	if( Verbose )
-	    printf("%d bytes required for compressed tables\n",
+	    printf("%ld bytes required for compressed tables\n",
 		  (i * sizeof(YY_TTYPE)) + (nnonterms * sizeof(YY_TTYPE*)));
     }
     output("\n\n");
