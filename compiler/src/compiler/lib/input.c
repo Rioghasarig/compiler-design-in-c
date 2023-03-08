@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <string.h>
 #include <io.h>
 #include <tools/debug.h>
@@ -57,9 +58,9 @@ typedef unsigned char	uchar;
 
 /* Pointers to open, close, and read functions */
 
-	int (*Openp) P((char*, int)) = (int(*)P((char*, int))) fopen;
-	int (*Closep) P((int)      ) =fclose;
-	int (*Readp)  P((int, void*, unsigned)) =fread ;
+	int (*Openp) P((char*, int)) = (int(*)P((char*, int))) open;
+	int (*Closep) P((int)      ) = (int(*)(int))close;
+	int (*Readp)  P((int, void*, unsigned)) =read ;
 void	ii_io( open_funct, close_funct, read_funct )
 int  (*open_funct)  P(( char* name, int mode ));
 int  (*close_funct) P(( int handle ));

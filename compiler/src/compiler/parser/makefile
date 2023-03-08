@@ -1,4 +1,4 @@
-CFLAGS = -std=c89 -DLLAMA -I../../../include/ -Wfatal-errors -Wno-incompatible-pointer-types
+CFLAGS = -std=c89 -DOCCS -I../../../include/ -Wfatal-errors -Wno-incompatible-pointer-types
 PP = ../../../bin/pp
 CC = gcc
 
@@ -41,11 +41,11 @@ lexyy.c:	parser.lex
 		sed 's/^[ 	]*#[ 	]*undef/#undef/' lexyy.c >.mk.tmp.
 		mv .mk.tmp. lexyy.c
 
-occs:   $(YYOBJ) $(COMOBJ) signon.c
+occs:   llout.o $(YYOBJ) $(COMOBJ) signon.c
 	echo \#define __DATE__ \"`date`\" >> date.h
 	$(CC) -c $(CFLAGS) signon.c
 	rm date.h
-	$(CC) -o occs  $(COMOBJ) $(YYOBJ) signon.o \
+	$(CC) -o  occs  llout.o $(COMOBJ) $(YYOBJ) signon.o \
 						$(CLIB) 
 
 llama:  llpar.o $(LLOBJ) $(COMOBJ) signon.c

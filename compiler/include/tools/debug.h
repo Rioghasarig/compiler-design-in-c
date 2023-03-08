@@ -70,7 +70,6 @@
 #	define volatile
 #	define memmove(d,s,n) bcopy(s,d,n)
 #	define memcpy(d,s,n)  bcopy(s,d,n)
-	extern long getpid();
 #	define raise(sig) kill( (int)getpid(), sig )
 #endif /*  MSDOS   */
 #endif /*__TURBOC__*/

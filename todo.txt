@@ -1,4 +1,5 @@
 X Compile the lexer for the occs parser:
     Find origin of the line "FILE* yyout = stdout" in the output of LeX applied to parser.lex
-Make occs compile without termlib or curses library
-    - Classify the missing functions causing the linker error
+Identify the Source of the segfault that occurs when running occs  
+    - Occurs at while(*action) in print_one_case in yypatch.c
+    - Something wrong with the way strings are stored in the creation of the production list
