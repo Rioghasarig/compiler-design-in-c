@@ -13,6 +13,7 @@ Changed functions using a variable number of arguments to use ANSI conventions e
     KnR mode. 
 Changed open/close/read to fopen/fclose/fread in src/compiler/lib/input.c
 Removed redefinitions of vfprintf and vprintf in debug.h
+In llama.par removed the initializtions of yycodeout,yybssout,yydataout, to stdout
 
 -- REMINDERS
 Omitted the error print in cmd_line_error

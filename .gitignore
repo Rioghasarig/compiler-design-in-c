@@ -57,3 +57,6 @@ compiler/src/compiler/lex/LeX
 compiler/src/compiler/parser/lexyy.c
 compiler/src/compiler/lex/lexyy.c
 compiler/src/compiler/parser/llama
+compiler/src/compiler/parser/occs
+compiler/src/compiler/parser/yyout.c
+compiler/src/compiler/parser/llout.c
