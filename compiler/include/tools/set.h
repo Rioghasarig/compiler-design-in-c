@@ -16,13 +16,11 @@ typedef unsigned short     _SETTYPE ;		   /* one cell in bit map   */
 typedef struct _set_
 {
     unsigned char nwords ;		/* Number of words in map	  */
-    unsigned char compl	 ;		/* is a negative true set if true */
     unsigned	  nbits  ;		/* Number of bits in map	  */
     _SETTYPE      *map   ;		/* Pointer to the map		  */
     _SETTYPE      defmap[ _DEFWORDS ];	/* The map itself		  */
-
+     unsigned int comp	 ;		/* is a negative true set if true */
 } SET;
-
 
 typedef int	(*pset_t)	P(( void* param, char *fmt, int val ));
 extern	int	 _addset	P(( SET* , int		 	 ));
@@ -53,7 +51,7 @@ extern  void	 truncate	P(( SET*			 ));
 
 #define CLEAR(s) 	memset( (s)->map,  0, (s)->nwords * sizeof(_SETTYPE))
 #define FILL(s)  	memset( (s)->map, ~0, (s)->nwords * sizeof(_SETTYPE))
-#define COMPLEMENT(s)	( (s)->compl = ~(s)->compl )
+#define COMPLEMENT(s)	( (s)->comp = ~(s)->comp )
 #define INVERT(s)	invert(s)
 
 #define _SET_EQUIV	0      /* Value returned from _set_test, equivalent   */
@@ -72,6 +70,6 @@ extern  void	 truncate	P(( SET*			 ));
 #define REMOVE(s,x)  (((x) >= (s)->nbits) ? 0		 : _GBIT(s,x,&= ~) )
 #define ADD(s,x)     (((x) >= (s)->nbits) ? _addset(s,x) : _GBIT(s,x,|=  ) )
 #define MEMBER(s,x)  (((x) >= (s)->nbits) ? 0		 : _GBIT(s,x,&   ) )
-#define TEST(s,x)    (( MEMBER(s,x) )     ? !(s)->compl	 : (s)->compl 	   )
+#define TEST(s,x)    (( MEMBER(s,x) )     ? !(s)->comp	 : (s)->comp 	   )
 
 #endif /* __SET_H */

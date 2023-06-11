@@ -233,8 +233,7 @@ c_name	[A-Za-z_][A-Za-z_0-9]*
 }
 /*----------------------------------------------------------------------*/
 
- void stripcr( src )       /* Remove all \r's (but not \n's) from src. */
-char	*src;
+ void stripcr( char* src )       /* Remove all \r's (but not \n's) from src. */
 {
     char	*dest;
     for( dest = src ; *src ; src++ )

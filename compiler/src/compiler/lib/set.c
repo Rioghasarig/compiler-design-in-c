@@ -58,7 +58,7 @@ SET	*set;
     }
 
     memset( new, 0, sizeof(SET) );
-    new->compl  = set->compl;
+    new->comp  = set->comp;
     new->nwords = set->nwords;
     new->nbits  = set->nbits;
 

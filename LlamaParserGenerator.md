@@ -17,3 +17,16 @@ LlamaParserGenerator
    - make_dtran, make_yy_pushtab, make_yy_acts
 
  ? Terms array holding pointers to terminal / non-terminal symbols 
+
+
+ --------------------------------------------------
+
+ Important Structures:
+ YYd - DFA transition table. Indexed by lookahead symbol and top of stack symbol. Requires select set for each symbol 
+
+ Yypushtab - Indexed by production number. Evaluates to list of
+ symbol values to push on the stack when executing given productiong
+
+ action_name -> action_str
+ nontermninal_name -> list of productions of that nonterminal
+ production = list of names of terminals/nonterminls/actions

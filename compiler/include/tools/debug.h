@@ -10,49 +10,7 @@
 #	define ND(x) x
 #endif
 
-#ifdef __TURBOC__	/* Compiling for Turbo/Borland C/C++	*/
-#    define BCC(x)  x	/* BCC(x) expands to its argument	*/
-#    define MSC(x)	/* these expand to empty strings	*/
-#    define MSC5(x)
-#    define MSC6(x)
-#    define MSC7(x)
-#    define UNIX(x)
-#    define ANSI(x) x
-#    define _8086
-#    define FARPTR far*
-#    define VA_LIST
-#    define MSDOS
-#else
-#if (defined(MSDOS) || defined(_MSDOS))
-#    ifndef MSDOS   		// In case the MSDOS predefinition
-#        define MSDOS 1		// disappears in future versions.
-#    endif
-#    if( defined(_MSC_VER) && _MSC_VER==700 )
-#       pragma message( "/* Compiling for Microsoft C, Ver. 7.x */" )
-#	define FARPTR __far*
-#	define MSC5(x)
-#	define MSC6(x)
-#       define MSC7(x) x
-#    elif( defined(MSC_VER) && MSC_VER==600 )
-#       pragma message( "/* Compiling for Microsoft C, Ver. 6.x */" )
-#	define FARPTR *far
-#	define MSC5(x)
-#	define MSC6(x) x
-#       define MSC7(x)
-#    else
-#       pragma message( "/* Compiling for Microsoft C, Ver. 5.x */" )
-#	define FARPTR far*
-#	define MSC5(x) x
-#	define MSC6(x)
-#       define MSC7(x)
-#    endif
-#	define BCC(x)		/* All versions */
-#	define MSC(x) x
-#	define UNIX(x)
-#	define ANSI(x) x
-#	define _8086
-#	define VA_LIST  ,...
-#else				/* Unix compiler */
+			/* Unix compiler */
 #	define BCC(x)
 #	define MSC(x)
 #	define MSC5(x)
@@ -66,13 +24,11 @@
 #	define O_BINARY 0	/* No binary input mode in UNIX open().     */
 #	define far		/* Microsoft/Turbo keyword for an 8086      */
 				/* 32-bit, far pointer. Ignore in UNIX.     */
-#	define const		/* Ignore ANSI const and volatile keywords. */
-#	define volatile
+
 #	define memmove(d,s,n) bcopy(s,d,n)
 #	define memcpy(d,s,n)  bcopy(s,d,n)
 #	define raise(sig) kill( (int)getpid(), sig )
-#endif /*  MSDOS   */
-#endif /*__TURBOC__*/
+
 
 #if (0 ANSI(+1))
 #	define KnR(x)
@@ -142,11 +98,11 @@
 #define MAXINT (((unsigned)~0) >> 1)
 
 #if ( 0 UNIX(+1) )
-#    ifndef max
-#        define max(a,b) ( ((a) > (b)) ? (a) : (b))
+#    ifndef MAX
+#        define MAX(a,b) ( ((a) > (b)) ? (a) : (b))
 #    endif
-#    ifndef min
-#        define min(a,b) ( ((a) < (b)) ? (a) : (b))
+#    ifndef MIN
+#        define MIN(a,b) ( ((a) < (b)) ? (a) : (b))
 #    endif
 #endif
 

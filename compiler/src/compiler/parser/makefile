@@ -7,11 +7,14 @@ COMOBJ = main.o acts.o lexyy.o first.o stok.o
 LLOBJ  = llselect.o llcode.o lldriver.o follow.o lldollar.o
 YYOBJ  = yypatch.o yycode.o yydriver.o yystate.o yydollar.o
 
+COMOBJ2 = main.o lexyy.o 
 LEX    = ../lex/LeX 
 CLIB = ../../../lib/l.lib ../../../lib/comp.lib
 
 # Common Objects
-main.o:		main.c	   parser.h
+main.o:		main.cpp	   parser.h
+		gcc -c -g -O0  -DLLAMA -I../../../include/ -Wfatal-errors -Wno-incompatible-pointer-types \
+		-Wno-format-security -Wno-format main.cpp -o main.o
 acts.o:		acts.pp.c   parser.h
 		$(CC) $(CFLAGS) -c -w acts.pp.c
 		mv acts.pp.o acts.o
@@ -37,8 +40,12 @@ llout.o:	llout.c parser.h
 		$(CC) $(CFLAGS) -Wno-format -c llout.c -o llout.o
 llout.c:	parser.lma
 		./llama -vl parser.lma
-llpar.o:	llpar.c	   parser.h
+#llpar.o:	llpar.c	   parser.h
+llpar.o: llpar.cpp parser.h
+		g++ -g -O0 -DLLAMA -I../../../include/ -Wfatal-errors -c llpar.cpp -o llpar.o
 
+CFGSymbolTable.o: CFGSymbolTable.h CFGSymbolTable.cpp
+		g++ -g -O0 -c CFGSymbolTable.cpp -o CFGSymbolTable.o
 
 acts.pp.c:	acts.c
 		$(PP) acts.c "$(CFLAGS)"
@@ -59,7 +66,9 @@ llama:  llpar.o $(LLOBJ) $(COMOBJ) signon.c
 	echo \#define __DATE__ \"`date`\" > date.h
 	$(CC) -c $(CFLAGS) signon.c
 	rm date.h
-	$(CC) -o llama llpar.o $(CFLAGS) $(COMOBJ) $(LLOBJ) signon.o \
+	g++ -g -O0 -DLLAMA -I../../../include/ -Wfatal-errors -Wno-incompatible-pointer-types \
+		-Wno-format-security -Wno-format -o llama llpar.o \
+		$(COMOBJ2)  signon.o CFGSymbolTable.o \
 						$(CLIB)
 
 llama2: llout.o $(LLOBJ) $(COMOBJ) signon.c

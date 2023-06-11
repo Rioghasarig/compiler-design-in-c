@@ -40,7 +40,7 @@
 #	define YY_D(x)
 #endif
 
-typedef unsigned char	YY_TTYPE;
+typedef int	YY_TTYPE;
 
 #define YYF		(( YY_TTYPE )(-1))
 
